@@ -1,0 +1,50 @@
+<apex:page lightningStyleSheets="true">
+
+    <apex:sectionHeader title="Employee" subtitle="New Employee"  description="This  Description is from Description Attribute"/>
+    <apex:form >
+        <apex:pageBlock Title="Employee Detail" helptitle="Do u Need Help" helpurl="hhhhhh" >
+        <apex:pageBlockButtons location="top" >
+        <apex:commandButton value="save"  style="color:green; font-size: 16px;"/>
+        <apex:commandButton value="cancel" style="color:red; font-size: 16px;"/>
+
+        </apex:pageBlockButtons>
+            
+        <apex:pageBlockSection >
+            <apex:pageBlockSectionitem >
+                <apex:outputLabel > Name:</apex:outputLabel>
+                <apex:inputText size="10" maxlength="10" />
+           </apex:pageBlockSectionitem>
+            
+            <apex:pageBlockSectionitem >
+            
+                <apex:outputLabel > COntact No.:</apex:outputLabel>
+                <apex:inputText size="10"/>
+            </apex:pageBlockSectionitem>
+         
+         <apex:pageBlockSectionitem >  
+        Address::<apex:inputTextarea rows="5" cols="30"  style="background-color:cyan;text-transform: capitalize;"/>
+        </apex:pageBlockSectionitem> 
+            <apex:pageBlockSectionitem > 
+           Sex:: <apex:selectCheckboxes >
+            <apex:selectOption itemlabel="Male"   itemvalue="-None-"/>
+                <apex:selectOption itemlabel="Female"      itemvalue="Hyd"/>
+                 
+            
+            </apex:selectCheckboxes>
+            </apex:pageBlockSectionitem>
+            <apex:pageBlockSectionitem >
+                <apex:outputLabel > City:</apex:outputLabel>
+               <apex:selectList size="1">
+                <apex:selectOption itemlabel="-None-"   itemvalue="-None-"/>
+                <apex:selectOption itemlabel="Hyd"      itemvalue="Hyd"/>
+                <apex:selectOption itemlabel="Chennai"  itemvalue="Chennai"/>
+            
+            </apex:selectList>
+                </apex:pageBlockSectionitem>
+        
+        </apex:pageBlockSection>
+        
+    </apex:pageBlock>
+
+        </apex:form>
+</apex:page>

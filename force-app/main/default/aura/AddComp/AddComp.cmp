@@ -1,0 +1,13 @@
+<aura:component >
+        <aura:attribute name="aval" type="Integer" default="0"/>
+        <aura:attribute name="bval" type="Integer" default="0"/>
+        <aura:attribute name="cval" type="Integer" default="0"/>
+    <aura:handler name="init" value="{!this}" action="{!c.show}"/>
+    
+    <div>
+    <h2>Aval::{!v.aval}</h2>
+    <h2>Bval::{!v.bval}</h2>
+    <h2>Add::{!v.cval}</h2>
+    </div>
+	
+</aura:component>

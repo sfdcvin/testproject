@@ -1,0 +1,3 @@
+<aura:component >
+	<ui:inputnumber label="Phone" ></ui:inputnumber>
+</aura:component>

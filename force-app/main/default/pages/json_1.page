@@ -1,0 +1,18 @@
+<apex:page controller="JSON_1">
+    
+    <apex:form >
+    {!cell}<br/><br/>
+    {!name}<br/><br/>
+    {!per}<br/><br/>
+    
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="callCreate" action="{!create}"/>
+        
+        </apex:pageBlockButtons>
+                     {!x}<br/><br/>
+                    {!y}<br/><br/>
+                    {!z}<br/><br/>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

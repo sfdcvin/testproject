@@ -1,0 +1,42 @@
+<apex:page >
+    <apex:sectionHeader title="AJHWS" subtitle="New Registration"/>
+    <apex:form >
+       <apex:tabPanel >
+            <apex:tab label="Personal Details" >
+                <apex:pageBlock title="Data Block">
+                    <!-- <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!save}" value="save"  />
+                <apex:commandButton action="{!cancel}" value="cancel" />
+                     </apex:pageBlockButtons>  --> 
+                    A:<apex:inputText /><br/><br/>
+                    B:<apex:inputText /><br/><br/>
+                    C:<apex:inputText /><br/><br/>
+                </apex:pageBlock>
+            
+            </apex:tab>
+             <apex:tab label="Education"  >
+                <apex:pageBlock title="Data Block">
+                      <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!save}" value="save"  />
+                <apex:commandButton action="{!cancel}" value="cancel" />
+                      </apex:pageBlockButtons>
+                    X:<apex:inputText /><br/><br/>
+                    Y:<apex:inputText /><br/><br/>
+                    Z:<apex:inputText /><br/><br/>
+                </apex:pageBlock>
+            
+            </apex:tab>
+             <apex:tab label="Experience">
+                <apex:pageBlock >
+                      <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!save}" value="save"  />
+                <apex:commandButton action="{!cancel}" value="cancel" />
+                      </apex:pageBlockButtons>
+                    M:<apex:inputText /><br/><br/>
+                    N:<apex:inputText /><br/><br/>
+                    O:<apex:inputText />
+                </apex:pageBlock>
+            </apex:tab>
+       </apex:tabPanel>
+   </apex:form>
+</apex:page>

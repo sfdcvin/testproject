@@ -1,0 +1,12 @@
+<apex:page controller="errorclass" >
+    <apex:form >
+    <apex:pageBlock title="DataEntry">
+        <apex:pageMessages />
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Enter Data" action="{!call}"/>
+        
+        </apex:pageBlockButtons>
+        name:<apex:inputText value="{!name}"/>
+     </apex:pageBlock>
+        </apex:form>
+</apex:page>

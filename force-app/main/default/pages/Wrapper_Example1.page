@@ -1,0 +1,18 @@
+<apex:page controller="Wrapper_Example1">
+  <apex:form >
+    <apex:pageBlock title="WrapperExample">
+        
+        <apex:pageBlockTable value="{!wc}"  var="a">
+              <apex:column value="{!a.accounts.id}"/>
+              <apex:column value="{!a.accounts.name}"/>
+            <apex:column >
+            <apex:repeat value="{!a.contacts}" var="b">
+                {!b.LastName}
+                   .{!b.FirstName}
+                   .{!b.Email}
+             </apex:repeat>
+         </apex:column>
+         </apex:pageBlockTable>
+   </apex:pageBlock>
+   </apex:form>    
+</apex:page>

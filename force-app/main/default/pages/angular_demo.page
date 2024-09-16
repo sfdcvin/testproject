@@ -1,0 +1,41 @@
+<apex:page >
+
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<select ng-model="model_one" ng-options="x.Branch_Code  as x.Branch_Name for x in array" style="background-color: red; alignment: center">
+
+    <option value="">-select-</option>
+
+</select>
+<h1>{{model_one}}</h1>
+<script>
+
+    var app=angular.module("app",[]);
+    app.controller("ctrl",function ($scope) {
+        $scope.array = [
+            {"Branch_Code":001,"Branch_Name":"Mechanical  Engineering"},
+            {"Branch_Code":002,"Branch_Name":"Computer Engineering"},
+            {"Branch_Code":003,"Branch_Name":"Electronic  Engineering"},
+            {"Branch_Code":004,"Branch_Name":"Civil  Engineering"}
+        ];
+
+        $scope.call=function  (){
+            document.getElementById("one").value="vineet";
+
+        }
+
+    });
+
+
+
+
+
+</script>
+<button ng-dblclick="call()">click me</button>
+
+<h1 id="vineet">
+    
+    </h1>
+
+
+
+</apex:page>

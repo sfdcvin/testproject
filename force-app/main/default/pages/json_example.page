@@ -1,0 +1,8 @@
+<apex:page controller="JSON_EXAMPLE_USECLASS">
+    {!objectTostringNonPretty}<br/><br/>
+    {!objectTostringPretty} <br/><br/>
+     {!objectTostringnonsupressed} <br/><br/>
+     {!objectTostringsupressed} <br/><br/>
+    
+    {!obj.name} &nbsp;&nbsp; {!obj.country} &nbsp;&nbsp;{!obj.sex} 
+</apex:page>

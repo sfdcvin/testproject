@@ -1,0 +1,41 @@
+<apex:page id="pg">
+    <script>
+       var a,b,result;
+    
+    function add(){
+        a=parseInt(document.getElementById("pg:fm:pb:adv1").value);
+    b=parseInt(document.getElementById("pg:fm:pb:adv2").value);
+    result=a+b;
+    document.getElementById("pg:fm:pb:adv3").value=result;
+        alert(b);
+        };
+    </script>
+    <apex:form id="fm">
+    <apex:pageBlock title="JavaScriptExample" id="pb">
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="add" onclick="add()"/>
+        
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="addition" >
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Enter First Value</apex:outputLabel>
+                <apex:inputText id="adv1"/>
+            
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Enter Second Value</apex:outputLabel>
+                <apex:inputText id="adv2"/>
+            
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >Result</apex:outputLabel>
+                <apex:outputText id="adv3"/>
+            
+            </apex:pageBlockSectionItem>
+        
+        </apex:pageBlockSection>
+        
+    
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

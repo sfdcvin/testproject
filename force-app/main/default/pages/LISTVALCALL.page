@@ -1,0 +1,7 @@
+<apex:page controller="ListValCall">
+    
+    <apex:repeat value="{!lst}" var="a"  >
+    
+        <apex:outputText value="{!a}"/>
+    </apex:repeat>
+</apex:page>

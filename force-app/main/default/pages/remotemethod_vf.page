@@ -1,0 +1,24 @@
+<apex:page readOnly="true" controller="RemoteMetthod_class">
+    <script>
+      function fncall(msg){
+         RemoteMetthod_class.call(msg,function(result,event){
+                                 
+                                 if(event.status)
+                                     {
+                                        document.getElementById("x").innerHTML=result;
+                                         }
+                                     });
+      }
+    
+    </script>
+    <apex:form >
+        <apex:pageBlock title="RemoteMethod"   >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="submit" onclick="fncall('vineet')"/>
+                </apex:pageBlockButtons>
+            
+            <div id="x"></div>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,16 @@
+<apex:page controller="vf_verification">
+    <apex:form >
+      <apex:pageBlock >
+          <div >
+              
+         
+          <apex:inputText value="{!name}"/>
+          <apex:outputText value="{!name}"/>
+        
+        </div>
+        
+        </apex:pageBlock>
+    
+    
+    </apex:form>
+</apex:page>

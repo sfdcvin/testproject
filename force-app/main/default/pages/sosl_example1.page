@@ -1,0 +1,29 @@
+<apex:page controller="Sosl_example1">
+    
+    <apex:pageBlock title="Sosl Example">
+        
+            <apex:pageBlockSection title="Data from Account" rendered="{! ISNULL(accounts)}">
+           
+                 <apex:pageBlockTable value="{!accounts}" var="a">
+                <apex:column value="{!a.name}"/>
+                <apex:column value="{!a.industry}"/>
+                   </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        
+        
+        
+        <apex:pageBlockSection title="Data from Contact">
+                    <apex:pageBlockTable value="{!contacts}"  var="b">
+                <apex:column value="{!b.name}"/>
+                <apex:column value="{!b.phone}"/>
+                <apex:column value="{!b.email}"/>
+                    </apex:pageBlockTable>
+
+            
+        </apex:pageBlockSection>
+       
+    </apex:pageBlock>
+    
+    
+    
+</apex:page>

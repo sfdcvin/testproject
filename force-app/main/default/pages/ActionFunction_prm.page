@@ -1,0 +1,27 @@
+<apex:page controller="ActionFunction_param"  id="page">
+    <script>
+    function call()
+    {
+       var name=document.getElementById("page:fm:nm").value;
+    var phone=document.getElementById("page:fm:phn").value;
+    
+       fun(name,phone);
+    
+    }
+    </script>
+    <apex:form id="fm">
+         <apex:actionFunction name="fun" action="{!Action}" reRender="one">
+        <apex:param name="name" assignTo="{!name}" value=""/>
+        <apex:param name="phone" assignTo="{!phone}" value=""/>
+        </apex:actionFunction>
+        Enter Name : <apex:inputText value="{!name}"  onchange="call()" id="nm"/>
+       
+        
+        Enter Phone : <apex:inputText value="{!phone}" onchange="call()" id="phn"/>
+       
+    <br/><br/>
+    <apex:outputLabel value="{!result}"  id="one"/>
+    </apex:form>
+ 
+
+</apex:page>

@@ -1,0 +1,47 @@
+<aura:component controller="DeveloperApexClass" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="developer" type="Developer__c" default="{}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    
+    <aura:attribute name="CountryPicklist" type="String[]" />  <!-- Picklist Values of StageName Field -->
+    
+    
+    
+    <lightning:layout multipleRows="true" >
+        <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6" >
+            <lightning:input                             
+                             label="Enter Name?"                           
+                             value="{!v.developer.Name}" name="name"                      
+                             /> 
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+            <lightning:input type="number"                            
+                             label="Enter Phone?"                           
+                             value="{!v.developer.Mobile__c}" name="mobile"                          
+                             />  
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+            <lightning:input type="email"                            
+                             label="Enter Email?"                           
+                             value="{!v.developer.Email__c}" name="Email"                       
+                             /> 
+        </lightning:layoutItem> 
+        <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+            <lightning:input type="text"                            
+                             label="Enter City?"                           
+                             value="{!v.developer.City__c}" name="city"                       
+                             /> 
+        </lightning:layoutItem> 
+        <lightning:layoutItem padding="around-large" size="6" smallDeviceSize="12" mediumDeviceSize="6">
+            
+            <lightning:select label="Stage" value="{v.developer.City__c}">
+                <aura:iteration items="{!v.CountryPicklist}" var="val">
+                    <option value="{!val}"> {!val}</option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem> 
+        
+    </lightning:layout>
+    <lightning:button label="Submit"
+                      onclick="{!c.submitForm}" class="slds-align_absolute-center"/>
+    
+</aura:component>

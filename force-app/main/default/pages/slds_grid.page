@@ -1,0 +1,50 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"> 
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en"> 
+        <head> 
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Salesforce Lightning Design System Trailhead Module</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+            <!-- Import the Design System style sheet --> 
+            <apex:slds /> 
+        </head> 
+        <body>
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds-scope"> 
+                <!-- MASTHEAD -->
+                <p class="slds-text-heading--label slds-m-bottom--small"> Salesforce Lightning Design System Trailhead Module </p> 
+                <!-- / MASTHEAD -->
+                <!-- PRIMARY CONTENT WRAPPER --> 
+                <div class="myapp">
+    
+    <div class="slds-grid ">
+        <div   class="slds-col slds-size_6-of-12 ">
+            <h1 style="color:blue">
+                This is Col 1 With Color Green
+            </h1>
+        </div>
+        
+        <div    class="slds-col slds-size_2-of-12">
+               <h1 style="color:red">
+                This is Col 2 With Color Green
+               </h1>
+        </div>
+        
+        <div    class="slds-col slds-size_2-of-12">
+               <h1 style="color:green">
+                This is Col 3 With Color Green
+               </h1>
+        </div>
+        
+        <div    class="slds-col slds-size_2-of-12">
+               <h1 style="color:black">
+                This is Col 4 With Color Green
+               </h1>
+        </div>
+        </div>
+   </div> 
+                <!-- / PRIMARY CONTENT WRAPPER -->
+            </div> <!-- / REQUIRED SLDS WRAPPER --> 
+        </body> 
+    </html> 
+</apex:page>

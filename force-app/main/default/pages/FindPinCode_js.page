@@ -1,0 +1,10 @@
+<apex:page controller="FindPinCode">
+    <apex:form >
+    
+        Enter city :<apex:inputText value="{!city}"/> <br/><br/>  
+        <apex:commandButton value="submit" action="{!getPinCode}"/>
+    
+    </apex:form>
+    
+    {!body}
+</apex:page>

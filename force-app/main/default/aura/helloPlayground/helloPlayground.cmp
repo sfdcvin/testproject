@@ -1,0 +1,18 @@
+<aura:component >
+    <aura:attribute name="message" type="List" default="['Welcome To Alien Brainz','start Your Career Here To Make it Bright and Bright']" />
+    <p>
+    
+        <c:helloMessage message="{!v.message[0]}" />
+        <c:helloMessage message="{!v.message[1]}" />
+        <c:helloMessage message="{!v.message[2]}" />
+    
+    </p>
+    
+    <aura:iteration items="{!v.message}" var="msg">
+    
+        <p><c:helloMessage message="{!msg}" /></p>    
+    
+    </aura:iteration>
+    
+    
+</aura:component>

@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="name" type="string"></aura:attribute>
+    <aura:attribute name="phone" type="string"></aura:attribute>
+   <div class="one">
+       Name:{!v.name}  <br/><br/>
+       Mob.:{!v.phone}
+    </div>
+	
+</aura:component>

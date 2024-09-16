@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <iframe src="https://fishbonetech-dev-ed--c.ap5.visual.force.com/apex/NewOpportunityButton" width="100%" height="500px;" frameBorder="0"/>
+
+</aura:component>

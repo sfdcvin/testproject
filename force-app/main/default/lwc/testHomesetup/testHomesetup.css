@@ -1,0 +1,11 @@
+.cardCSS {
+height:60px;
+width: 100%;
+border: 1px solid blue;
+vertical-align: middle
+}
+
+.arrow {
+    float: right;
+    cursor:pointer;
+}

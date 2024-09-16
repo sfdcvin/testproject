@@ -1,0 +1,11 @@
+<apex:page controller="LinkExample">
+    <apex:form >
+        <apex:outputLink target="_blank" value="https://www.google.com" >google
+        </apex:outputLink>
+        
+        <apex:commandLink target="_blank" value="get page" action="{!callMe}">
+            <apex:param assignTo="{!IdValue}" value="0017F00001SaaS3"/>
+            
+        </apex:commandLink>
+        </apex:form>
+</apex:page>

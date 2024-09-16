@@ -1,0 +1,13 @@
+<apex:page controller="AlienSupport">
+<apex:form >
+<apex:inputText value="{!name}">
+<apex:actionSupport event="onchange"  action="{!getAccount}" reRender="one"/>
+</apex:inputText>
+<apex:pageBlock title="Account" id="one"  >
+<apex:pageBlockTable value="{!accList}" var="a" rendered="{! !ISNULL(accList)}">
+<apex:column value="{!a.name}" />
+<apex:column value="{!a.industry}" />
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

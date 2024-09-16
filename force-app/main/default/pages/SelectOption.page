@@ -1,0 +1,26 @@
+<apex:page controller="JavascriptRemoting">
+    <script>
+
+        function callJavascriptRemoting()
+    {
+            alert("Hello Vineet"); 
+        var name="vin";
+        JavascriptRemoting.callRemoteAction(name,function(result,event){
+        if(event.status)
+            {
+            alert("Hello Vineet");    
+            }
+            else if(result.type === 'exception')
+                {
+                                alert("Hello Vineet");    
+
+                    }
+            
+        });
+    }
+    </script>
+    <apex:form >
+        <apex:commandButton value="Javascriptremoting" onclick="callJavascriptRemoting()" />
+        <button onclick="callJavascriptRemoting()">Get Text value from Controller method</button>
+    </apex:form>
+</apex:page>

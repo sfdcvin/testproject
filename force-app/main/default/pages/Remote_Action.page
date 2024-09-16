@@ -1,0 +1,25 @@
+<apex:page controller="Remote_Action" id="page">
+    
+    <script>
+    
+     /*  ClassName.MethodName(param1,param2,param3)
+    	param1 : parameters that we need to pass to the method
+        param2 : function(result,event){}
+        		 result : This is the value returned from the method 
+                 event  : This will specify true of false
+                 Using the result what ever we have received ,what ever the logic we want to perform 
+                 that logic will be defined in the function
+         param3 :{escape :true} : This will return back to the page
+     */
+         function show()
+         {
+        Remote_Action.remote('vineet',function(result,event){document.getElementById('page:fm:one').innerHTML=result;},
+                             { escape :true });
+         
+        }
+           </script>
+    <apex:form id="fm">
+    <apex:commandButton value="click" oncomplete="show()" />
+    <apex:outputLabel id="one"/>
+        </apex:form>
+</apex:page>

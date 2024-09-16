@@ -1,0 +1,26 @@
+<aura:component controller="ExtensibleApex" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+        <aura:attribute name="Phone1" type="Integer" default=''/>
+    <aura:attribute name="flag" type="boolean" />
+        <aura:attribute name="nama" type="string" />
+<aura:if isTrue="{!v.flag}">
+    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account">
+        <lightning:messages />
+            <div class="slds-grid">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning:inputField fieldName="Name" value="{!v.nama}"/>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning:inputField fieldName="Industry"/>
+                </div>
+            </div>
+        <lightning:button class="slds-m-top_small" type="submit" label="Create new" />
+    </lightning:recordEditForm>
+</aura:if>    
+
+    
+    
+<lightning:input  label="Phone" value="{!v.Phone1}"/>
+<lightning:button label="call Phone" variant="brand" onclick="{!c.callPhone}"/>
+   
+
+</aura:component>

@@ -1,0 +1,4 @@
+<design:component label="Hello World">
+   <design:attribute name="greeting" label="Greeting" />
+   <design:attribute name="subject" label="Subject" />
+</design:component>

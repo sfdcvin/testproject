@@ -1,0 +1,4 @@
+<apex:page >
+    <c:mycomponent2 name="vineet" phone="7737249019" age="25">
+    </c:mycomponent2>
+</apex:page>

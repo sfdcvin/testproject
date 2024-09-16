@@ -1,0 +1,20 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="options" type="List" default="[
+        { label: 'English', value: 'en' },
+        { label: 'German', value: 'de' },
+        { label: 'Spanish', value: 'es' },
+        { label: 'French', value: 'fr' },
+        { label: 'Italian', value: 'it' },
+        { label: 'Japanese', value: 'ja' }]"/>
+
+    <lightning:dualListbox name="languages"  
+                           label= "Select Languages" 
+                           sourceLabel="Available" 
+                           selectedLabel="Selected" 
+                           fieldLevelHelp="This is a dual listbox" 
+                           options="{!v.options}" 
+                           onchange="{! c.handleChange }"/> <br/>
+            <lightning:avatar src="{!$Resource.Logo}" initials="BW" fallbackIconName="standard:person_account" alternativeText="Bob Wilson"/>
+
+    
+</aura:component>

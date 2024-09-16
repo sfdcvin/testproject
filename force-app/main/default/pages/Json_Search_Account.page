@@ -1,0 +1,11 @@
+<apex:page controller="Json_Search_Account">
+    <apex:form >
+      <apex:inputText value="{!search}"/>  &emsp;
+        <apex:commandButton value="search" action="{!search}" reRender="one"  status="mystatus"/>
+        <apex:actionStatus startText="Loading...." stopText=".." id="mystatus"> </apex:actionStatus>
+            <apex:outputLabel value="{!result}" id="one"/> 
+        
+       
+    
+    </apex:form>
+</apex:page>

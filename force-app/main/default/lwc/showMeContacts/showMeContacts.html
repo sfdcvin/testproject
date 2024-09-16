@@ -1,0 +1,40 @@
+<template>
+<template if:true={data}>
+<!--<lightning-datatable 
+key-field="Id"
+data={data}
+columns={columns}
+></lightning-datatable>   -->
+<template if:true={populationData}>
+
+<lightning-datatable 
+key-field="ID"
+data={populationData}
+columns={popcolumns}
+>
+</lightning-datatable>   
+</template>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+
+</tr>
+</thead>
+<tbody>
+<template for:each={data} for:item="item"  >
+    <tr key={item.id}>
+        <td>{item.Name}</td>
+
+
+    </tr>
+</template>
+</tbody>
+
+
+
+</table>
+
+
+</template>
+</template>

@@ -1,0 +1,13 @@
+<template>
+<lightning-card >
+<lightning-input label="Enter City" onchange={searchCityChange} >
+</lightning-input>
+<lightning-button label="Search" onclick={checkWeather} ></lightning-button>
+
+<template if:true={weatherInfo}>
+    <p> <span>Temp :</span>{weatherInfo.temp} </p>
+    <p> <span>main :</span>{weatherInfo.main} </p>
+    <p> <span>description :</span>{weatherInfo.description} </p>
+</template>
+</lightning-card>
+</template>

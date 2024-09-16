@@ -1,0 +1,12 @@
+<apex:page controller="SoslPracticeApex" >
+    <apex:form >
+    <apex:inputText value="{!input}">
+        <apex:actionSupport event="onchange" action="{!callMe}" reRender="vin" />
+    </apex:inputText>
+    <apex:pageBlock title="table" id="vin">
+        <apex:pageBlockTable value="{!userRecordList}" var="val">
+            <apex:column value="{!val.name}"/>       
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

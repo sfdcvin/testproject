@@ -1,0 +1,5 @@
+<aura:component controller="ExtensibleApex" extensible="true" abstract="true">
+    <aura:attribute name="Phone1" type="Integer" default=''/>
+    <aura:attribute name="flag" type="boolean" />
+    {!v.body}
+</aura:component>

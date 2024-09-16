@@ -1,0 +1,71 @@
+<template>
+<div class="slds-page-header stickyHeader" style="display: flex; align-items: flex-center; justify-content: space-between;text-align: center; z-index: 10000;">
+    <div >
+    <lightning-icon  size="x-small"  style="margin-left:20px;" class="sldsicon"
+        
+        icon-name="utility:back" onclick={back}
+        ></lightning-icon>
+    </div>
+    <div class="slds-text-heading--label content" style="margin-left:-20px;">Application</div>
+    <div></div>
+</div>
+<div class="slds-scrollable inputDiv">
+    <template if:true={spinner}>
+        <div class="overlay">
+        <div class="spinner">
+    <lightning-spinner alternative-text="Loading"  ></lightning-spinner>
+</div>
+</div>
+    </template>
+    <template  if:true={input}>
+    <label>Enter Degree Type</label>
+    <lightning-input type="text" value={education.Degree_Type__c} name="Degree_Type__c" onchange={valueAssignment} > </lightning-input>
+    <label>Enter Start Date</label>
+    <lightning-input type="date" value={education.Start_Date__c} name="Start_Date__c" onchange={valueAssignment}> </lightning-input>
+    <label>Enter End Date</label>
+    <lightning-input type="date" value={education.End_Date__c} name="End_Date__c" onchange={valueAssignment}> </lightning-input>
+    <template for:each={education.docNames} for:item="doc">
+        {doc.name} 
+    </template>
+    <lightning-file-upload
+    label="Upload File"
+    name="fileUploader"
+    onuploadfinished={handleUploadFinished}
+    multiple
+ 
+>
+</lightning-file-upload>
+
+
+</template>
+<template  if:true={card}>
+    <template for:each={eduList} for:item="edu" for:index="index">
+        <div data-index={index} key={edu.id} class="cardStyle" style="display: flex; align-items: flex-center; justify-content: space-between;text-align: center;" onclick={cardClick}>
+            <div style="margin-left:15px;">
+        {edu.Degree_Type__c} </br>{edu.Start_Date__c} &nbsp;&nbsp; {edu.End_Date__c}
+    </div>
+    <div>></div>
+    </div>
+
+    </template>
+    <div>
+      <lightning-icon
+        icon-name="utility:add"
+        size="small"
+        style="--sds-c-icon-color-foreground-default: blue;"
+    >
+    </lightning-icon> <span  onclick={addMore} class="addMore" > Add More</span></div>
+</template>
+</div>
+
+<template if:true={enableDefault}>
+<div class="slds-page-header stickyFooter">
+    <span class="slds-text-heading--label content">Footer</span>
+</div>
+</template>
+<template if:true={save}  >
+<div class={saveCSS} onclick={saveEducation}  >
+<span class="slds-text-heading--label content" style="margin-left:16px;">Save and Next</span>
+</div>
+</template>
+</template>

@@ -1,0 +1,12 @@
+<aura:component controller="LightningExample1"  >
+    <aura:attribute name="accounts" type="account" />
+    <aura:attribute name="name" type="string" />
+    
+    <ui:inputText label="Enter Name" value="{!v.name}"/>
+    <ui:button label="get data" press="{!c.getacc}"/><br/><br/>
+    <aura:iteration var="a" items="{!v.accounts}">
+        
+        <p>{!a.Name}  ::::  {!a.Industry}</p>
+                    
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,22 @@
+<apex:page standardcontroller="Account" extensions="Soql_Query_find" >
+    <apex:form >
+ <apex:inputText value="{!accountholdername}"/>
+          <apex:commandButton value="search"   action="{!call}"  />
+              
+          <apex:pageBlock title="Search Account" rendered="{! !ISNULL(accountholdername)}"  >
+              <apex:pageBlockButtons location="top">
+                  <apex:commandButton value="Save" action="{!save}"/>
+                  <apex:commandButton value="Cancel" action="{!cancel}"/>
+              
+              </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!result}" var="a"   id="one"  >
+            
+           <apex:column value="{!a.id}"/>
+           <apex:column value="{!a.name}"/>
+  
+           </apex:pageBlockTable>
+               </apex:pageBlock>
+               
+  
+    </apex:form>
+</apex:page>

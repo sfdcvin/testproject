@@ -1,0 +1,21 @@
+<apex:page controller="ActionSupport">
+    <script>
+    
+      function call()
+    {
+       fun();
+    }
+    
+    </script>
+    <apex:form >
+         <apex:actionFunction name="fun" action="{!Action}" reRender="one"/>
+        Enter Name : <apex:inputText value="{!name}"  onchange="call()" />
+       
+        
+        Enter Phone : <apex:inputText value="{!phone}" onchange="call()"/>
+       
+    <br/><br/>
+    <apex:outputLabel value="{!result}"  id="one"/>
+    </apex:form>
+        
+</apex:page>

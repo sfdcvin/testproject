@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <lightning:card title="Display, Create, or Edit Records">
+        <lightning:recordForm recordId="{!v.recordId}" 
+                              objectApiName="Account"
+                              fields="Name" />
+    </lightning:card>
+</aura:component>

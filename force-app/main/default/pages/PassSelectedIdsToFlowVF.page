@@ -1,0 +1,8 @@
+<apex:page standardController="Account" recordSetVar="Acc" extensions="PassSelectedIdsToFlowVFController" lightningStylesheets="true">
+    
+    <flow:interview name="ShowAccountIds">
+        <!-- AccountIDs is flow input variable & SelectedAccountIDs is a property in the Apex controller -->
+        <apex:param name="AccountIds" value="{!SelectedAccountIDs}" />
+    </flow:interview>
+    
+</apex:page>

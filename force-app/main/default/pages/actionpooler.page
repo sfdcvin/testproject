@@ -1,0 +1,7 @@
+<apex:page controller="action_pooler">
+      <apex:form >
+   
+    <apex:outputText value="{!count}" id="counter"/>
+           <apex:actionPoller action="{!actionpooler}" reRender="counter" interval="5"/>
+      </apex:form>  
+</apex:page>

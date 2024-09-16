@@ -1,0 +1,6 @@
+<aura:component >
+    <div class="div" >
+    <ui:inputDate label="Date"  />
+    <ui:button label="submit" class="btn"  ></ui:button>
+        </div>
+</aura:component>

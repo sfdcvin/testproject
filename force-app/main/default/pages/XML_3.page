@@ -1,0 +1,9 @@
+<apex:page controller="XML_3">
+    
+     <apex:pageblock >
+        <apex:pageBlockTable value="{!myMap}" var="a">
+            <apex:column value="{!a}" headerValue="key"/>   
+            <apex:column value="{!myMap[a]}"  headerValue="value"/> 
+         </apex:pageBlockTable>
+    </apex:pageblock>
+</apex:page>

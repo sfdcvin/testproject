@@ -1,0 +1,8 @@
+<apex:page controller="actionStatusApex">
+    <apex:form id="form">
+        <apex:commandButton action="{!spin}" value="Show Spinner" rerender="form" status="status" />
+        <apex:actionStatus id="status" startText="Fetching" stopText="">
+           
+        </apex:actionStatus>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page controller="JSON_Parser">
+    <apex:pageblock >
+        <apex:pageBlockTable value="{!ResMap}" var="a">
+            <apex:column value="{!a}" headerValue="key"/>   
+            <apex:column value="{!ResMap[a]}"  headerValue="value"/> 
+         </apex:pageBlockTable>
+    </apex:pageblock>
+</apex:page>

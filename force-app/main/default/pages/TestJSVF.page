@@ -1,0 +1,12 @@
+<apex:page >
+<script>
+    function show(){
+        alert('Test');
+    }
+</script>
+<apex:form >
+         
+            <apex:commandButton value="Store" onclick="show();"/>
+
+</apex:form>
+</apex:page>

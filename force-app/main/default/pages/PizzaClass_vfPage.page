@@ -1,0 +1,23 @@
+<apex:page controller="PizzaClass" >
+     <apex:pageMessages />
+    <apex:form >
+      
+
+        <apex:pageBlock id="refresh">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="getData" action="{!getPizzas}"/>
+                <apex:inputText value="{!id}"/>
+                <apex:commandButton value="Delete" action="{!deletePizza}" />
+                </apex:pageBlockButtons>
+           <apex:pageBlockTable value="{!pizzas}" var="a" rendered="{! !ISNULL(pizzas)}" >
+               <apex:column value="{!a.name}"/>
+               <apex:column value="{!a.id}"/>
+               <apex:column value="{!a.Size__c}"/>
+            
+            
+            </apex:pageBlockTable>
+        
+        </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

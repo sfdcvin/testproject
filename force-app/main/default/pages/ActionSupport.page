@@ -1,0 +1,15 @@
+<apex:page controller="ActionSupport">
+    <apex:form >
+    Enter Name : <apex:inputText value="{!name}" >
+         <apex:actionSupport event="onchange" action="{!Action}" reRender="one"/>   
+        </apex:inputText><br/><br/>
+                <apex:actionRegion >
+    Enter Phone : <apex:inputText value="{!phone}">
+        <apex:actionSupport event="onchange" action="{!Action}" reRender="one"/>
+        </apex:inputText>
+                </apex:actionRegion>
+    <br/><br/>
+    <apex:outputLabel value="{!result}"  id="one"/>
+    </apex:form>
+        
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page >
+  
+       
+            <apex:image width="300" height="300"  alt="eye" url="{!URLFOR($Resource.Krishna)}" />
+                 
+            
+   
+</apex:page>

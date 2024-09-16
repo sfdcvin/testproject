@@ -1,0 +1,26 @@
+.custom-container{
+	color : black;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  overflow: auto; /* Enable scroll if needed */
+
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 300px;
+   height: 200px;
+   background-color: white;
+   padding: 20px;
+   border: 1px solid black;
+   box-shadow: 10px 10px 5px #888888;
+}
+
+/* Modal Content */
+.modal-content {
+
+}

@@ -1,0 +1,9 @@
+<apex:page controller="ProblemCheckApex" >
+    <apex:form >
+     <apex:commandButton value="click" action="{!callMe}" reRender="me">
+      <!--  <apex:param assignTo="{!name}" value="xyzxyzxyzxyz" /> -->
+    </apex:commandButton>
+    <apex:inputText value="{!name}" id="me"/>
+    </apex:form>
+   
+</apex:page>

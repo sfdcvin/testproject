@@ -1,0 +1,10 @@
+<apex:page controller="FindPostOffice">
+    <apex:form >
+    
+        Enter Branch :&emsp;<apex:inputText value="{!pin}"/> <br/><br/>  
+        <apex:commandButton value="submit" action="{!find}"/>
+    
+    </apex:form>
+    
+    {!body}
+</apex:page>

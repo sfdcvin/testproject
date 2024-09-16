@@ -1,0 +1,16 @@
+<apex:page >
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Test" collapsible="true">
+            Hello World
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        var oldTwist = window.twistSection;
+        window.twistSection = function() {
+            alert('Detected twist');
+            oldTwist.apply(this, arguments);
+        }
+    });
+    </script>
+</apex:page>

@@ -1,0 +1,11 @@
+<apex:page controller="apiLayer">
+    <apex:form >
+    
+        Enter city :<apex:inputText value="{!amt}"/> <br/><br/>  
+        <apex:commandButton value="submit" action="{!find}"/>
+    
+    </apex:form>
+    
+    {!body} <br/><br/><br/>
+   
+</apex:page>

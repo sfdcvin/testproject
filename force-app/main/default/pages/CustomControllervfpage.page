@@ -1,0 +1,11 @@
+<apex:page Controller="CustomController1">
+    <apex:pageBlock title="this is Custom Controller testing">
+        <apex:pageBlockTable value="{!lsls}" var="a">
+            <apex:column value="{!a.FirstName__c}"/>
+            <apex:column value="{!a.LastName__c}"/>
+            <apex:column value="{!a.Course__c}"/>
+                           
+        
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

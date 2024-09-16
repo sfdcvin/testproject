@@ -1,0 +1,34 @@
+<apex:page controller="custom_controler_clss">
+    <apex:form >
+         
+
+
+    <apex:pageBlock title="Calculator" id="one">
+       
+         <apex:pageMessages />
+        <apex:pageBlockButtons location="top">
+          <apex:commandButton value="Addition" action="{!add}" reRender="one"/>
+            <apex:commandButton value="Reset" action="{!reset}" reRender="one"/>
+        
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection columns="1">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >   value1</apex:outputLabel>
+                <apex:inputText value="{!val1}"/>
+            </apex:pageBlockSectionItem>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel >   value2</apex:outputLabel>
+                <apex:inputText value="{!val2}"/>
+            </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem rendered="{! !ISNULL(val3)}">
+                <apex:outputLabel >   Addition</apex:outputLabel>
+                <apex:outputText value="{!val3}"/>
+            </apex:pageBlockSectionItem>
+        
+        
+        
+        </apex:pageBlockSection>
+       
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

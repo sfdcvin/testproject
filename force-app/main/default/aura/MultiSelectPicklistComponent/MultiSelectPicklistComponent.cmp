@@ -1,0 +1,46 @@
+<aura:component controller="MultiSelectPicklistApex">
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="pVal" type="List"/> 
+    <aura:attribute name="dValRef" type="Object"/> 
+    <!--  <aura:attribute name="dVal" type="List"/> -->
+    <aura:attribute name="dVal" type="string[]"/> 
+    <aura:attribute type="boolean" name="disabledPick" default="true"/> 
+    <aura:attribute name="Spinner" type="boolean" default="false"/> 
+    
+    
+    
+    
+    <div class="slds-container--center slds-container--small slds-m-top--small">
+        <div class="slds-form--stacked">
+            
+            <lightning:select name="parentPicklist" label="Countries"  aura:id="parentPicklist" onchange="{!c.fetchChildPicklist}">
+                <option value="">None</option>
+                <aura:iteration items="{!v.pVal}" var="d">
+                    <option value="{!d.value}">{!d.text}</option>
+                </aura:iteration>
+            </lightning:select>
+            
+            <lightning:select name="dependentPicklist" label="Cities" disabled="{!v.disabledPick}">
+                <option value="">None</option>
+                <aura:iteration items="{!v.dVal}" var="d">
+                    <option value="{!d}">{!d}</option>
+                </aura:iteration>
+            </lightning:select> 
+            <br/>
+            <lightning:button label="Submit"
+                              onclick="{!c.toggleSpinner}" /> <br/><br/>
+                    <lightning:button label="ToastMessage"
+                          variant="brand"
+                          onclick="{!c.showToast}"
+                                      />
+            <div class="exampleHolder">
+                <aura:if isTrue="{!v.Spinner}">
+                    <lightning:spinner aura:id="mySpinner" />
+                </aura:if>
+            </div>
+            
+        </div>        
+    </div>	
+</aura:component>

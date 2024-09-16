@@ -1,0 +1,23 @@
+<template>
+    <div>
+    <lightning-button label="New" title="Non-primary action" onclick={handleClickNew} class="slds-m-left_x-small" ></lightning-button>
+</div>
+<template lwc:if={createNew}>
+<c-lead-data-page-create onoffsave={afterSave}></c-lead-data-page-create>
+    </template>
+
+</br>
+    <div style="height: 300px;">
+        <template lwc:if={leadRecords.data}>
+        <lightning-datatable
+                key-field="id"
+                data={leadRecords.data}
+                columns={columns}>
+        </lightning-datatable>
+        </template>
+        <template lwc:if={error}>
+            {error}
+    </template>
+    </div>
+
+</template>

@@ -1,0 +1,16 @@
+<apex:page standardController="Employee__c" recordSetVar="emp">
+<apex:form >
+  <apex:pageBlock Title="multiple records">
+  <apex:pageBlockTable value="{!emp}"  var="a">
+  <apex:column value="{!a.Name}"/>
+
+  <apex:column value="{!a.Phone__c}"/>
+
+   <apex:InlineEditSupport />
+  </apex:pageBlockTable>
+   
+  </apex:pageBlock>
+  <apex:commandButton value="save" action="{!Quicksave}"/>
+
+  </apex:form>
+</apex:page>

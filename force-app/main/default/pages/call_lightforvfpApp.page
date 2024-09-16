@@ -1,0 +1,27 @@
+<apex:page >
+    <!-- if you want to include the lignting with in the VF page we should include <apex:includeLightning> tag -->
+    <apex:includeLightning />
+    <div id="one"> </div>
+    <script>
+    	/* If you want to use lightning applicaton with in the VF page then we have 
+    		$Lightning.use("theNamespace:lcvfTest", function() {}); 
+            what ever the logic we want to write we have to define with in the function
+        */
+		$Lightning.use("c:lightforvfp1", function() {
+            /* $Lightning.createComponent(param1,param2,param3,param4);
+            	param1: name of the component which we want to reffer 
+                		namespace:componentname 
+                
+                param2: This is used to pass attribute values or parameters 
+                		{ first: "satish",last:"Myla"}
+                        
+                param3: Id  of the element where we want to display the lighting component in the VF Page 
+                
+                Param4: function(){} : Where we define the action that we want to perform
+               */
+          	$Lightning.createComponent("c:lightforvf",{},"one",function(cmp) {});
+           
+        });
+
+    </script>
+</apex:page>

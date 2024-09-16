@@ -1,0 +1,25 @@
+<template>
+<lightning-card title="Progress Bar"><br/>
+    <div style="margin-left: 2%;">
+        <lightning-progress-bar size="medium" value={progress} variant="circular"></lightning-progress-bar>
+    </div>
+</lightning-card>
+
+<template if:true={bool1}>
+<lightning-input type="text"
+label="Enter Name" value={firstname} onchange={nameChange}>
+</lightning-input>
+</template>
+
+<template if:true={bool2}>
+
+<lightning-input type="text"
+label="Enter Place"  value={place} onchange={placeChange}>
+</lightning-input>
+</template>
+
+<lightning-button label="Previous" onclick={previous} ></lightning-button>
+<lightning-button label="next" onclick={next} ></lightning-button>
+<lightning-button label="Save" onclick={Save} ></lightning-button>
+
+</template>

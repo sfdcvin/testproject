@@ -1,0 +1,27 @@
+<apex:page controller="MausamVibhag">
+    <apex:form >
+    
+        Enter city :<apex:inputText value="{!city}"/> <br/><br/>  
+        <apex:commandButton value="submit" action="{!find}"/>
+    <apex:pageBlock title="Mausam Jankari"  rendered="{! !ISNULL(body)}">
+        <apex:pageBlockSection >
+            <apex:pageBlockSectionItem >
+        <apex:outputLabel value="city"/>    <apex:outputText value="{!cityname}"/>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+        <apex:outputLabel value="humidity"/>  <apex:outputText value="{!humidity}"/> 
+                </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+        <apex:outputLabel value="wind"/>  <apex:outputText value="{!wind}"/> 
+                </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+        <apex:outputLabel value="cloud"/>  <apex:outputText value="{!cloud}"/> 
+                </apex:pageBlockSectionItem>
+        
+</apex:pageBlockSection>        
+    </apex:pageBlock>
+    </apex:form>
+    
+   
+    
+</apex:page>

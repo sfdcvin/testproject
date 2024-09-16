@@ -1,0 +1,50 @@
+<apex:page controller="pagination1" docType="html-5.0">
+  
+    <apex:form >
+        
+        search account:    <apex:inputText value="{!searchByString}">
+                          <apex:actionSupport event="onchange" action="{!searchOpportunity}" reRender="Display"/>
+                          </apex:inputText>
+        
+        accounts per page:  <apex:input value="{!size}" type="number" id="number_of_records" html-step="10"  html-min="10" html-max="100"> 
+                            <apex:actionSupport event="onchange" action="{!afterSizePageChange}" reRender="Display"/>
+                            </apex:input>
+        
+            <apex:sectionHeader title="Pagination"/>
+               
+                  <apex:pageBlock id="Display" >
+                      <apex:inlineEditSupport />
+                         <apex:pageBlockButtons >
+                             <apex:commandButton value="First" action="{!controller.first}" rendered="{!controller.hasprevious}" reRender="Display"/>
+                             <apex:commandButton value="Previous" action="{!controller.previous}"  rendered="{!controller.hasprevious}" reRender="Display"/>
+                            <apex:commandButton value="Next" action="{!controller.next}"  rendered="{!controller.hasnext}" reRender="Display"/>
+                            <apex:commandButton value="Last" action="{!controller.last}"  rendered="{!controller.hasnext}" reRender="Display"/>
+                  
+                         </apex:pageBlockButtons>
+                      
+            <!-- if there is no record than show a message -->
+             <apex:outputText rendered="{!IF(wrapperRecordList.size==0,'true','false')}">No Record Found </apex:outputText>
+            
+       <apex:pageBlockTable value="{!wrapperRecordList}" var="a" rendered="{!IF(wrapperRecordList.size>0,'true','false')}">
+            <apex:column >
+            <apex:facet name="header"><apex:selectCheckboxes /></apex:facet>
+            <apex:selectCheckboxes value="{!a.isSelected}"/>
+            </apex:column>
+            
+            <apex:column headervalue="Action">
+                <apex:commandLink value="Delete" action="{!deleteRecord}"  reRender="Display">
+                    <apex:param value="{!a.oppRecord.id}" assignTo="{!id}" />
+                </apex:commandLink>
+             </apex:column>
+             <apex:column value="{!a.oppRecord.name}"/>
+             <apex:column value="{!a.oppRecord.stagename}"/>
+             <apex:column value="{!a.oppRecord.closeDate}"/>
+            
+
+        </apex:pageBlockTable><br/><br/>
+    <apex:outputText rendered="{!IF(wrapperRecordList.size>0,'true','false')}">{!(controller.pageNumber * size)+1-size}-{!IF((controller.pageNumber * size)>controller.resultsize, controller.resultsize,(controller.pageNumber * size))} of {!controller.resultsize}</apex:outputText>
+
+            </apex:pageBlock>
+       
+    </apex:form>
+ </apex:page>

@@ -1,0 +1,25 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0"> 
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en"> 
+        <head> 
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Salesforce Lightning Design System Trailhead Module</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+            <!-- Import the Design System style sheet --> 
+            <apex:slds /> 
+        </head> 
+        <body>
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds-scope"> 
+                <!-- MASTHEAD -->
+                <p class="slds-text-heading--label slds-m-bottom--small"> Salesforce Lightning Design System Trailhead Module </p> 
+                <!-- / MASTHEAD -->
+                <!-- PRIMARY CONTENT WRAPPER --> 
+                <div class="myapp">
+                   <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed"> <svg aria-hidden="true" class="slds-icon"> <use xlink:href="{!URLFOR($resource.SLDS, 'icons/standard-sprite/svg/symbols.svg#operating_hours')}"></use> </svg> <span class="slds-assistive-text">Account Icon</span> </span>
+                </div> 
+                <!-- / PRIMARY CONTENT WRAPPER -->
+            </div> <!-- / REQUIRED SLDS WRAPPER --> 
+        </body> 
+    </html> 
+</apex:page>

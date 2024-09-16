@@ -1,0 +1,58 @@
+<apex:page controller="UserData">  
+        <script>
+    //  while selecting 2nd picklist call this method
+    function department()
+    {
+        
+        var a=document.getElementById('j_id0:j_id2:j_id5:selectList1').value;
+        if(a=='None')
+        {
+            window.alert("Warning : First Choose City");
+                 document.getElementById('j_id0:j_id2:j_id5:selectList2').value ="None";
+        }
+        else
+        {
+            fdepartment();
+        }
+    }
+    
+    //   this method gets called when when a text is entered in search input
+
+    
+    </script>
+    <apex:form >
+        <apex:actionFunction name="fdepartment" action="{!records}"  reRender="vin" />
+        <apex:actionFunction name="search" action="{!search}"   reRender="vin,selectList1,selectList2" />
+            Select City &nbsp; <apex:selectList size="1" value="{!selectedCity}"  id="selectList1" >
+            <apex:selectOptions value="{!cities}"/>
+            <apex:actionSupport event="onkeyup" action="{!records}"  reRender="vin" />
+        
+            </apex:selectList>  &nbsp;
+            
+            Select Department &nbsp;   <apex:selectList size="1" value="{!selecteddepartment}" id="selectList2" >
+            <apex:selectOptions value="{!departments}"/>
+            <apex:actionSupport event="onchange" onsubmit="department();"  reRender="selectList2" />
+            </apex:selectList>  
+            <apex:outputPanel style="float:right;" id="outputPanel">
+                Enter Name: &nbsp; <apex:inputText value="{!searchByName}" id="input" >
+                <apex:actionSupport event="onkeyup" action="{!search}" reRender="vin,selectList1,selectList2" />
+                </apex:inputText>
+            </apex:outputPanel> 
+            <br/><br/>
+            <div style="overflow: scroll;  height: 500px;" id="d">
+                <apex:pageBlock id="vin"  title="User's Data"   >
+                    <apex:facet name="header">
+                        <apex:outputLabel value="User's Data" style="color:Black;font-size:20px;" />
+                    </apex:facet>
+                    
+                    <apex:pageBlockTable value="{!userRecordList}"  var="u"  rendered="{! if(userRecordList.size>0,true,false)}">
+                        <apex:column value="{!u.name}"  />    
+                        <apex:column value="{!u.city}"  /> 
+                        <apex:column value="{!u.department}"  />
+                    </apex:pageBlockTable>
+                    <apex:outputText value="No Data Found"  rendered="{! if(userRecordList.size==0,true,false)}"/>
+                </apex:pageBlock> 
+            </div>
+
+    </apex:form>    
+</apex:page>

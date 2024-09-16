@@ -1,0 +1,86 @@
+<aura:component controller="createContact" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:isUrlAddressable" >
+   
+  <!--   <aura:handler name="init" value="{!this}" action="{!c.saveContactRecord}" />  -->
+    <aura:attribute name="selectedLookUpRecord" type="sObject" default="{}"/>
+    <aura:attribute name="flag" type="boolean"/>  -->
+    <aura:attribute name="objContact" type="Contact" default="{'sobjectType':'contact'}"/>
+    <div class="slds-m-around_large">
+        <lightning:card title="Create Contact" iconName="standard:contact" footer="Fishbone tech">
+            <h3 class=" slds-m-horizontal_large slds-section__title slds-theme--success primaryPaletteBorder test-id__section-header-container" data-aura-rendered-by="1284:3107;a"><span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate" data-aura-rendered-by="1286:3107;a">Additional Information</span></h3>
+            
+            <div class="slds-m-around_large">
+                <div class="slds-grid  slds-wrap slds-grid--pull-padded slds-grid_align-space">  
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.FirstName}" 
+                                         label="First Name" required="true" aura:id="firstname" messageWhenValueMissing="Please Enter First Name"/>
+                    </div>
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.LastName}" label="Last Name" required="true" aura:id="lastname"/>
+                        
+                    </div>
+                </div>
+                <div class="slds-grid  slds-wrap slds-grid--pull-padded slds-grid_align-space">  
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.Phone}" 
+                                         label="Phone" required="true" aura:id="phone" messageWhenValueMissing="Please Enter Phone"/>
+                    </div>
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.Email}" label="Email" required="true" aura:id="email"/>
+                        
+                    </div>
+                </div>
+                <div class="slds-grid  slds-wrap slds-grid--pull-padded slds-grid_align-space">   
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        
+                        <c:customLookup objectAPIName="account" 
+                                        IconName="standard:account" 
+                                        selectedRecord="{!v.selectedLookUpRecord}" 
+                                        label="Account Name"/>
+                        <aura:if isTrue="{!v.flag==true}">
+                            <div lightning-input_input="" id="help-message-4" data-help-message="true" role="alert" class="slds-form-element__help" style="color:red">Please Enter First Name</div>                        </aura:if> 
+                    </div>
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        
+                    </div>                    
+                    
+                </div>
+                <div class="slds-grid  slds-wrap slds-grid--pull-padded slds-grid_align-space">  
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.Title}" 
+                                         label="Title" required="true" aura:id="title" messageWhenValueMissing="Please Enter Title"/>
+                    </div>
+                    <div class="slds-size--1-of-2 slds-p-horizontal_medium">
+                        <lightning:input type="text" 
+                                         value="{!v.objContact.Department}" label="Department" required="true" aura:id="Department"/>                   
+                    </div>
+                </div>             
+            </div>    
+            
+            <br/>   <h3 class=" slds-m-horizontal_large slds-section__title slds-theme--success primaryPaletteBorder test-id__section-header-container" data-aura-rendered-by="1284:3107;a"><span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate" data-aura-rendered-by="1286:3107;a">Address Information</span></h3>
+            <br/>    <h3 class=" slds-m-horizontal_large slds-section__title slds-theme--success primaryPaletteBorder test-id__section-header-container" data-aura-rendered-by="1284:3107;a"><span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate" data-aura-rendered-by="1286:3107;a">Additional Information</span></h3>
+            <br/>    <h3 class=" slds-m-horizontal_large slds-section__title slds-theme--success primaryPaletteBorder test-id__section-header-container" data-aura-rendered-by="1284:3107;a"><span class="test-id__section-header-title section-header-title slds-p-horizontal--small slds-truncate" data-aura-rendered-by="1286:3107;a">Description Information</span></h3>
+            <div class="slds-m-around_large">
+                <div class="slds-grid  slds-wrap ">  
+                    <div class="slds-size--1-of-2 slds-float_left" >
+                        <lightning:textarea name="myTextArea" value="{!v.objContact.Description}" 
+                                            label="Description" maxlength="300" />  
+                        
+                        
+                    </div>  
+                </div>
+            </div>
+            <br/>                       
+            
+            <lightning:button label="Submit"
+                              onclick="{!c.saveContactRecord}" 
+                              class="slds-align_absolute-center"/>   
+            
+    
+        </lightning:card>
+    </div>
+</aura:component>

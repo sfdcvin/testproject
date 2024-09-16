@@ -1,0 +1,32 @@
+<apex:page id="pg" >
+    <script>
+    function add()
+    		{
+              var  aval=document.getElementById('pg:fm:pb:fn').value;
+              var  bval=document.getElementById('pg:fm:pb:ln').value;
+              var result=parseInt(aval)+parseInt(bval);
+                document.getElementById('pg:fm:pb:rs').value=result;
+    		}
+    function clear()
+    		{
+             document.getElementById('pg:fm:pb:fn').value="";
+             document.getElementById('pg:fm:pb:ln').value="";
+              
+                document.getElementById('pg:fm:pb:rs').value="";
+    		}
+      
+    </script>
+    <apex:form id="fm">
+        <apex:pageBlock id="pb" >
+          
+            aval:<apex:inputText id="fn"  />
+            bval:<apex:inputText id="ln"  />
+            add   :<apex:inputText id="rs" />
+            <apex:commandButton value="Submit" oncomplete="add()" />
+            <apex:commandButton value="clear" oncomplete="clear()" />
+        </apex:pageBlock>
+    
+    
+    
+    </apex:form>
+</apex:page>

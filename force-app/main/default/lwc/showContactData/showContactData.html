@@ -1,0 +1,33 @@
+<template>
+        <template if:true={contact}>
+Name : {contact.Name}
+Email : {contact.Email}
+        </template>
+
+           <!--     <template if:true={ObjectData}>
+<template for:each={ObjectData} for:item="item">
+
+
+                            <div key={item.key} class="slds-box slds-box_xx-small slds-m-bottom_x-small">
+                                <p><strong>{item.key}:</strong> {item.value}</p>
+                            </div>
+{item.key}
+{item.value}
+
+</template>  
+{ObjectData.OrderNo} -->  </br>
+ <template if:true={ordersWithKeyValuePairs}>
+        <template for:each={ordersWithKeyValuePairs} for:item="order">
+            <lightning-card key={order.id} icon-name="custom:custom63">
+                <div class="slds-m-around_medium">
+                    <template for:each={order.keyValuePairs} for:item="pair">
+                        <div key={pair.key} class="slds-box slds-box_xx-small slds-m-bottom_x-small">
+                            <p><strong>{pair.key}:</strong> {pair.value}</p>
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </template>
+    </template>
+        
+</template>

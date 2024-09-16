@@ -1,0 +1,17 @@
+<apex:page standardController="Account">
+    <apex:pageBlock title="this is my pageBlock">
+         <!--<marquee>This is basic example of marquee</marquee>  -->
+     
+    
+        <apex:pageBlockSection title="this is my pageBlockSection">
+        Account Name:    {! Account.Name}<br/>
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="this is my pageBlockSection">
+        Account Name:    {! Account.Name}<br/>
+        </apex:pageBlockSection>
+
+        
+    </apex:pageBlock>
+   
+</apex:page>

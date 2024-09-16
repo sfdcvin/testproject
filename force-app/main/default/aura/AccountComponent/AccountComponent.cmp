@@ -1,0 +1,26 @@
+<aura:component controller="oppSLAMatrixCalcController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:attribute name="slaData" type="list" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="slds-section slds-is-open">
+        <div aria-hidden="false" class="slds-section__content">
+            <table class="t_design table table-striped slds-table slds-table--bordered slds-table--cell-buffer slds-table--col-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><div class="slds-truncate" Style="font-weight: bold;">Name</div></th>
+                        <th scope="col"><div class="slds-truncate" Style="font-weight: bold;">Stage Name</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.slaData}" var="sla" indexVar="index">
+                        <tr>
+                            
+                            <td scope="row" data-label="Select"><ui:outputText value="{!sla.Name}" /></td>
+                            <td scope="row" data-label="Select"><ui:outputText value="{!sla.stageName}"/></td>
+
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,779 @@
+<apex:page standardController="Account"  extensions="MainController" sidebar="true" showHeader="true" docType="html-5.0">
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        
+        <style>
+            /*body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:17px;
+            line-height:1.6;
+            }*/
+            
+            .button{
+            background:coral;
+            padding:1em 2em;
+            color:#fff;
+            border:0;
+            }
+            
+            .button:hover{
+            background:#333;
+            }
+            
+            .modal{
+            display:none;
+            position: fixed;
+            z-index:9998;
+            left: 0;
+            top:0;
+            height: 100%;
+            width:100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            }
+            
+            .modal-content{
+            background-color:#f4f4f4;
+            margin: 20% auto;
+            width:50%;
+            box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+            animation-name:modalopen;
+            animation-duration:1s;
+            }
+            
+            .modal-header h2, .modal-footer h3{
+            margin:0;
+            }
+            
+            .modal-header{
+            background:coral;
+            padding:15px;
+            color:#fff;
+            }
+            
+            .modal-body{
+            padding:10px 20px;
+            }
+            
+            .modal-footer{
+            background:coral;
+            padding:10px;
+            color:#fff;
+            text-align: center;
+            }
+            
+            .closeBtn{
+            color:#ccc;
+            float: right;
+            font-size:30px;
+            color:#fff;
+            }
+            
+            .closeBtn:hover,.closeBtn:focus{
+            color:#000;
+            text-decoration: none;
+            cursor:pointer;
+            }
+            
+            @keyframes modalopen{
+            from{ opacity: 0}
+            to {opacity: 1}
+            }
+        </style>
+        
+        <style>
+            
+            .fff:hover {background-color:red !important;}
+            
+            .clr1:hover{
+            background-color:#f47c7c !important ;
+            }
+            .clr2:hover{
+            background-color:#96c641 !important ;
+            }
+            
+            .clr3:focus{
+            outline: white ;
+            }
+            
+            .search:hover{
+            background-color:#5bd35b !important ;
+            }
+            .commoncss:hover{
+            background-color:#d0d5db !important ;
+            }
+            .xyz {
+            color:white !important ;
+            background-color : #236fbd !important;
+            }
+            
+            .show{
+            background-color : cyan !important;
+            }
+            .hide{
+            background-color : red !important;
+            }
+            .delete{
+            color:white !important;
+            background-color:#4db0d1 !important;
+            }
+            .greenColour {background-color:green;}
+            .redColour {background-color:red;}
+            .greyColour {background-color:grey;} 
+            
+            .tableHeader {
+            
+            <!--    background-color:grey !important;  -->
+            }
+            
+        </style>
+        
+        
+        <apex:form >
+            <apex:PageBlock > 
+                <apex:pageMessages id="showMessage"></apex:pageMessages>
+                <apex:PageBlockSection > 
+                    <apex:selectList label="select sObject" value="{!selectedobj}" size="1" style="width:30%">
+                        <apex:selectOptions value="{!options}">   
+                        </apex:selectOptions>
+                        <apex:actionsupport event="onchange" action="{!getSelObjFields}"/> 
+                    </apex:selectList>
+                    <apex:pageBlockSectionItem dataStyle="text-align:left; width: 50%; max-width: 55%;">
+                        <apex:commandButton id="modalBtn" styleClass="button" value="Select Fields"
+                                            onclick="openModal()" reRender="simpleModal"
+                                            disabled="{!IF(selectedobj == null || selectedobj == 'None',true,false)}"/>
+                        <apex:actionStatus id="detailStatus">
+                            <apex:facet name="start">
+                                <img src="/img/loading32.gif" border="0" width="30" height="30"/>
+                            </apex:facet>
+                            <apex:facet name="stop"/>
+                        </apex:actionStatus>
+                    </apex:pageBlockSectionItem><br/>
+                    <button id="modalBtn" type="button" class="button" style="display:none">Select Fields</button>
+                </apex:PageBlockSection>
+            </apex:PageBlock>
+        </apex:form>
+        
+        <apex:form >
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="closeBtn">&times;</span>
+                        <h2>Select Fields</h2>
+                    </div>
+                    <div class="modal-body">
+                        <center style="padding-left: 40px;">
+                            <c:MultiSelectPicklistComponent leftlabel="Available"
+                                                            leftoption="{!objfieldoptions}"
+                                                            rightlabel="Selected"
+                                                            rightoption="{!selectedfields}"
+                                                            size="14" width="200px">
+                            </c:MultiSelectPicklistComponent> <br/><br/>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <apex:commandbutton onClick="save()" value="Save" reRender="simpleModal" status="detailStatus"/> &nbsp;&nbsp;&nbsp;
+                        <apex:commandbutton onClick="closepop()" value="Cancel" reRender="simpleModal"/>
+                        <apex:actionFunction action="{!savePopup}" name="saveFields" reRender="pbId"/>
+                        <apex:actionFunction action="{!cancelPopup}" name="cancel" reRender="pbId"/>
+                    </div>
+                </div>
+            </div>       
+        </apex:form>
+        
+         <apex:sectionHeader title="Account" subtitle="Account Records" />
+        <apex:form id="theForm"  html-novalidate="novalidate">
+            <!--   <apex:inputCheckbox  >
+<apex:actionSupport event="onclick"  action="{! updateContactSearchItemsMap}" reRender="false"/>
+</apex:inputCheckbox>   -->
+            
+            <apex:actionFunction name="searchRecords" action="{!SearchRecords}"   rerender="pbt"/>
+            <apex:actionFunction name="cancelFunction" action="{!cancelCreate}" immediate="true"  rerender="none"/>
+            <apex:actionFunction name="deletefunction" action="{!deleteRecord}"   rerender="none"/>
+            <apex:actionFunction name="updateFunction" action="{!updateRecord}"   rerender="none"/>
+            <apex:actionFunction name="showEventMethod" action="{!showEventMethod}"   rerender="theForm"/>
+            <apex:actionFunction name="showTaskMethod" action="{!showTaskMethod}"  rerender="theForm"/>
+            <apex:actionFunction name="selectContactActionFunction" action="{!updateContactSearchItemsMap}" reRender="none"/>
+            <apex:actionFunction name="deleteContactActionFunction" action="{!deleteContactRecord}" rerender="false"/>
+            
+            
+            <apex:outputPanel style="text-align:right;" layout="block" > 
+                <apex:outputLabel style="background:white;color:black;height:30px;font-size:20px;">Records Per Page</apex:outputLabel>&nbsp;&nbsp;
+                <apex:input value="{!PAGE_SIZE}" type="number"  id="number_of_records" title="Records Per Page" html-step="10"  html-min="10" html-max="100" styleClass="clr3"  style="height:30px;width:100px;border-radius:8px;font-size:15px;" > 
+                    <!--     <apex:actionSupport event="onchange" action="{!afterSizePageChange}" reRender="pbId"/>  -->
+                </apex:input>
+            </apex:outputPanel>
+            
+            <apex:outputPanel style="text-align:Right;" layout="block" >
+                <apex:outputLabel style="background:white;color:black;height:30px;font-size:20px;">Select Date Filter</apex:outputLabel>&nbsp;&nbsp;
+                <apex:selectList size="1" value="{!dateFormat}"  multiselect="false" title="Filter"   style="color:green;height:30px;width:100px;border-radius:8px;background:#fafaf9;margin-top:3px;margin-bottom:3px;" id="dateFormat"> 
+                    <apex:selectOptions value="{!selectedFilterFormatForData}" />  
+                    <apex:actionSupport event="onchange" reRender="dateInput"/>
+                </apex:selectList>&nbsp;
+                Date &nbsp; <apex:input type="date" value="{!dat}" styleClass="clr3" disabled="{!If((dateFormat=='<='),false,If((dateFormat=='>='),false,If((dateFormat=='>'),false,If((dateFormat=='<'),false,true))))}" style="color:green;height:30px;width:170px;border-radius:8px; background:#fafaf9;margin-top:3px;margin-bottom:3px;" id="dateInput">
+                <!--     <apex:actionSupport event="onchange" action="{! callMe}" reRender="false"  />   -->
+                </apex:input>
+                
+                <!--       <apex:outputPanel style="text-align:Right;" layout="block" >
+<apex:outputLabel style="background:white;color:black;height:30px;font-size:20px;">Filter</apex:outputLabel>&nbsp;&nbsp;
+<apex:selectList size="1" value="{!selectedFilter}"  multiselect="false" title="Filter" styleClass="clr3"  style="color:green;height:30px;width:100px;border-radius:8px; background:#fafaf9;margin-top:3px;margin-bottom:3px;" id="cb1"> 
+<apex:selectOptions value="{!selectedFilterForData}" />  
+</apex:selectList>
+</apex:outputPanel>    
+-->     
+                <apex:commandButton value="Search"  action="{!searchByDateFilter}" reRender="pbId,searchInput" styleClass="search" style="background:green; color:white; height:30px;width:60px;border-radius:8px;font-size:15px;margin-top:3px;margin-bottom:3px;">
+                </apex:commandButton>
+            </apex:outputPanel>
+            
+            
+            
+            
+            
+            <apex:outputPanel style="text-align:right;" layout="block" >
+                
+                <div style="float:left;margin-bottom:0px;">
+                    <apex:outputLabel style="background:white;color:black;font-size:20px;margin-bottom:0px;">Search Records</apex:outputLabel>&nbsp;&nbsp;    <apex:inputText value="{!searchByString}"  html-placeholder="Enter Name" styleClass="clr3" style="height:30px;font-size:15px;border-radius:8px;" id="searchInput"/>
+                    <apex:commandButton value="Search" onclick="checkForSearchRecords();" reRender="dateFormat" styleClass="search" style="background:green; color:white; height:30px;width:60px;border-radius:8px;font-size:15px;margin-bottom:0px;"/>
+                </div>
+                
+                <apex:commandButton value="New Record" action="{!createRecord}"  reRender="theForm,pbId" styleclass="commoncss" style="color:green;height:30px;width:95px;border-radius:8px;margin-bottom:0px; background:#fafaf9;"/>
+                <apex:commandButton action="{!saveRecord}" value="Save"  reRender="theForm" styleclass="commoncss" style="color:green;width:66px;height:30px;border-radius:8px;margin-bottom:0px; background:#fafaf9;"/>
+                <apex:commandButton value="Refresh"  action="{!refresh}" styleclass="commoncss"   style="color:green;border-radius:8px;width:66px;height:30px;margin-bottom:0px; background:#fafaf9;" reRender="theForm,pbId">
+                </apex:commandButton>
+                
+                <apex:commandButton value="Cancel" onclick=" return cancelRecord();"  reRender="theForm" styleclass="commoncss" style="color:green;width:66px;height:30px;border-radius:8px;margin-bottom:0px; background:#fafaf9;"/>  
+                <!--	 <apex:commandButton value="Export" styleclass="commoncss" style="color:green; background:#fafaf9;"/>   -->
+                <apex:commandButton value="Collapse All" action="{!hide}" reRender="pbt" styleclass="commoncss" style="color:green;border-radius:8px;height:30px;margin-bottom:0px; background:#fafaf9;"/>
+            </apex:outputPanel>
+            
+            <!-- for new -->
+            
+            <apex:pageBlock title="New Record" mode="edit" id="creat" rendered="{! create}">
+                <div style="">
+                    <apex:pageBlockSection title="Record Information" columns="2">
+                        <apex:inputField value="{!account.name}"/>
+                        <apex:inputField value="{!account.phone}"/>
+                        <apex:inputField value="{!account.industry}"/>
+                        <apex:inputField value="{!account.site}"/>
+                        <apex:inputField value="{!account.Website}"/>
+                        <apex:inputField value="{!account.AnnualRevenue}"/>
+                        <apex:inputField value="{!account.CustomerPriority__c}"/>
+                        <apex:inputField value="{!account.YearStarted}"/>
+                        <apex:inputField value="{!account.type}"/>
+                        <apex:inputField value="{!account.accountNumber}"/>
+                    </apex:pageBlockSection>
+                </div>
+            </apex:pageBlock>
+            
+            <!-- for new -->
+            <apex:pageBlock title="All Accounts" mode="inlineEdit" id="pbId" Rendered="{!pbId}">       <!-- rendered="{!wrapperRecordList.size!=0}" -->
+                <apex:pageMessages />
+                <apex:outputLabel >{!selectedfield}</apex:outputLabel><br/>
+                
+                <apex:outputText rendered="{!IF(wrapperRecordList.size==0,'true','false')}">No Record Found </apex:outputText>
+                <div style="overflow: scroll;  height: 500px;" id="d">
+                    <apex:pageBlockTable value="{!wrapperRecordList}" var="acc" rendered="{!IF(wrapperRecordList.size>0,'true','false')}" style="background:antiquewhite;" id="pbt" headerClass="xyz" onrowmouseover="this.classList.remove('highlight')">
+                        
+                        <apex:column width="5%">
+                            <!--     <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'checkedone')"  id="myMaster"/></apex:facet> -->
+                            <!--   <apex:inputCheckbox value="{!acc.isSelected}" id="checkedone" onclick="uncheckMaster(this,'myMaster')"> -->
+                            <apex:facet name="header" ><apex:outputPanel id="SelectedCount"><apex:inputCheckbox onclick="checkAll(this,'checkedone')"  id="myMaster"><apex:actionSupport event="onchange" action="{!xyz}" reRender="false" rerender="SelectedCount"/></apex:inputCheckbox><apex:outputLabel value="Select"></apex:outputLabel><br/><apex:outputText value="{!SelectedCount}" /></apex:outputPanel>
+                            </apex:facet> 
+                            &nbsp;&nbsp;<apex:inputCheckbox value="{!acc.isSelected}" id="checkedone" > 
+                            <apex:actionSupport action="{!xyz}" event="onchange" reRender="false" rerender="SelectedCount"/>
+                            </apex:inputCheckbox> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <!--     <apex:commandbutton value="Delete" action="{!deleteRecord}"  reRender="pbId" rendered="{!IF(wrapperRecordList.size>0,'true','false')}" styleclass="commoncss" style="background:#fafaf9; "/>  -->
+                        </apex:column>  
+                        
+                        <!--   start Related  -->
+                        <apex:column width="10%">
+                            <apex:facet name="header">
+                                <apex:outputLabel ><img src="{!URLFOR($Resource.SLDS, 'icons/standard/related_icon.png')}"  style="width: 15%; height: 20px; background:white; " alt=""/>&nbsp;Related List</apex:outputLabel>
+                            </apex:facet>
+                            <apex:commandButton action="{!relatedList}" reRender="showId" value="Show" styleclass="commoncss" style="color:green; background:#fafaf9;">
+                                <apex:param name="id" assignTo="{!accId}" value="{!acc.record.id}"/>
+                            </apex:commandButton>
+                            <apex:commandButton action="{!hide}" reRender="showId" value="Hide" styleclass="commoncss" style="color:black;background:#fafaf9; ">
+                            </apex:commandButton>
+                        </apex:column>
+                        
+                        <!--    End Related    -->                        
+                        <!--apex:column >
+                            <apex:facet name="header"> 
+                                <apex:outputText > Name &nbsp;
+                                    <apex:image url="{!$Resource.Filter}" width="23" height="23"  title="Filter">
+                                        <apex:actionSupport />
+                                    </apex:image>
+                                </apex:outputText>
+                            </apex:facet>
+                            <apex:outputField value="{!acc.record.name}"  >   
+                                <apex:outputLink value="https://fishbonetech-dev-ed--c.ap5.visual.force.com/apex/vf_for_url">>> 
+                                    <apex:param name="id" value="{!acc.record.id}" assignTo="{!IId}"/>    
+                                </apex:outputLink> 
+                            </apex:outputField>   
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header"> 
+                                <apex:outputText > Industry &nbsp;
+                                    <apex:image url="{!$Resource.Filter}" width="23" height="23"  title="Filter">
+                                        <apex:actionSupport event="onclick" action="{!showPicklist}" reRender="pbId,picklist"/>
+                                    </apex:image>
+                                    <apex:selectList size="1" value="{!selectedname}" multiselect="false"  style="background:#236fbd; " Rendered="{! showPicklist}" id="picklist"> 
+                                        <apex:actionSupport event="onchange" action="{!findBySelected}" reRender="pbId"/>
+                                        <apex:selectOptions value="{!selectedaccnamefields}"/>  
+                                    </apex:selectList>
+                                </apex:outputText>  
+                            </apex:facet>
+                            <apex:outputField value="{!acc.record.industry}"/>
+                        </apex:column>
+                        
+                        <apex:column >
+                            <apex:facet name="header"> 
+                                <apex:outputText > Phone &nbsp;
+                                    <apex:image url="{!$Resource.Filter}" width="23" height="23"  title="Filter">
+                                        <apex:actionSupport />
+                                    </apex:image>
+                                </apex:outputText>
+                            </apex:facet>
+                            <apex:outputField value="{!acc.record.Phone}"/>
+                        </apex:column-->
+                        
+                        <apex:repeat value="{!selectedfield}" var="fld">
+                            <apex:column value="{!acc.Record[fld]}"/>
+                        </apex:repeat>
+                        
+                        <!--   start Related   -->
+                        
+                        <apex:column breakBefore="true" colspan="5" id="showId"  >
+                            
+                            <apex:pageBlock title="Related List" id="showRelated" rendered="{!show}" > 
+                                <apex:outputText rendered="{!showMessage}">No Related List Found </apex:outputText>
+                                <apex:outputPanel rendered="{!showRelated}" >  
+                                    <apex:pageBlockSection title="Section1" id="section1" columns="1"   > 
+                                        <apex:facet name="header"><apex:outputLabel style="font-size:15px;"><img src="{!URLFOR($Resource.SLDS, 'icons/standard/custom_contact_icon_multi.png')}"  style="width: 1.3%; height: 20px; background:red; " alt=""/>Contacts</apex:outputLabel>    </apex:facet>
+                                        <apex:outputText rendered="{! if(cons==false,'true','false')}">No Contact Found </apex:outputText>
+                                        <apex:outputPanel rendered="{!cons}" >
+                                            <apex:outputPanel style="text-align:center;" layout="block">
+                                                <apex:commandButton value="New Contact" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                                <apex:commandButton value="Save" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                            </apex:outputPanel> 
+                                            <apex:outputPanel id="outpnl1" >
+                                                <apex:pageBlockTable value="{!ContactWrapperRecordList}" var="c" rendered="{!showContacts}" title="Contacts" headerClass="tableHeader" >
+                                                    <apex:column >
+                                                        <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'contactCheckedone')"><apex:actionSupport event="onchange" action="{!updateContactSearchItemsMap
+                                                                                                                                                                                                }" reRender="false" /></apex:inputCheckbox></apex:facet>
+                                                        <apex:inputCheckbox id="contactCheckedone" value="{!c.isSelected }"  onclick="selectContactJavaScript();" />
+                                                    </apex:column>
+                                                    <apex:column headerValue="Id" value="{!c.contactRecord.id}"/>
+                                                    <apex:column headerValue="firstname" value="{!c.contactRecord.firstname}"/>
+                                                    <apex:column headerValue="lastname" value="{!c.contactRecord.lastname}"/>
+                                                </apex:pageBlockTable>  
+                                            </apex:outputPanel>
+                                            <div  style="text-align:center;">
+                                                <apex:commandbutton value="Delete" onClick="deleteContactJavaScript();" styleclass="clr1" rerender="section1"
+                                                                    rendered="{!IF(ContactWrapperRecordList.size>0,'true','false')}"   style="background:white;width:120px;" id="btn"/>
+                                                <apex:commandbutton value="Update" action="{!updateRecord}"   rendered="{!IF(ContactWrapperRecordList.size>0,'true','false')}" styleclass="clr2" style="background:white;width:120px; margin:10px; "/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSection>
+                                    
+                                    
+                                    <apex:pageBlockSection id="section2" columns="1" >
+                                        <apex:facet name="header"><apex:outputLabel style="font-size:15px;"><img src="{!URLFOR($Resource.SLDS, 'icons/standard/opportunity_120.png')}"  style="width: 1.3%; height: 20px; background:red; " alt=""/>opportunities</apex:outputLabel></apex:facet>
+                                        <apex:outputText rendered="{! if(opps==false,'true','false')}">No Opportunities Found </apex:outputText>
+                                        <apex:outputPanel rendered="{!opps}">
+                                            <apex:outputPanel style="text-align:center;" layout="block">
+                                                <apex:commandButton value="New Opportunity" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;" />
+                                                <apex:commandButton value="Save" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                            </apex:outputPanel> 
+                                            <apex:outputPanel id="outpnl2" >
+                                                <apex:pageBlockTable value="{!Opportunities}" var="o"  rendered="{!showOpportunities}" title="Opportunities" >
+                                                    <apex:column >
+                                                        <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'opportunityCheckedone')"/></apex:facet>
+                                                        <apex:inputCheckbox id="opportunityCheckedone"/>                                
+                                                    </apex:column>
+                                                    <apex:column headerValue="Id" value="{!o.id}"/>
+                                                    <apex:column headerValue="Name" value="{!o.name}"/>
+                                                    <apex:column headerValue="Stagename" >
+                                                        <div style="background-color:{!If(o.StageName =='Negotiation/Review','#7CFC00',If(o.StageName =='Closed Won','#DEB887','#DC143C'))};">
+                                                            {!o.stagename}
+                                                        </div>
+                                                    </apex:column>
+                                                </apex:pageBlockTable>
+                                            </apex:outputPanel>
+                                            <div  style="text-align:center;">
+                                                <apex:commandbutton value="Delete"  styleclass="clr1"
+                                                                    style="background:white;width:120px; margin:5px;" id="btn"/>
+                                                <apex:commandbutton value="Update"  styleclass="clr2" style="background:white;width:120px; margin:5px; "/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSection> 
+                                    
+                                    <apex:pageBlockSection id="section3" columns="1" >
+                                        <apex:facet name="header"><apex:outputLabel style="font-size:15px;"><img src="{!URLFOR($Resource.SLDS, 'icons/standard/case_icon.png')}"  style="width: 1.3%; height: 20px; " alt=""/>Cases</apex:outputLabel>    </apex:facet>
+                                        <apex:outputText rendered="{! if(cses==false,'true','false')}">No Case Found </apex:outputText>
+                                        <apex:outputPanel rendered="{!cses}">
+                                            <apex:outputPanel style="text-align:center;" layout="block">
+                                                <apex:commandButton value="New Case" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                                <apex:commandButton value="Save" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                            </apex:outputPanel> 
+                                            <apex:outputPanel id="outpnl">
+                                                <apex:pageBlockTable value="{!cases}" var="c" rendered="{!showCases}" title="Cases"  >
+                                                    <apex:column >
+                                                        <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'caseCheckedone')"/></apex:facet>
+                                                        
+                                                        <apex:inputCheckbox id="caseCheckedone"/>
+                                                    </apex:column>
+                                                    <apex:column headerValue="Id" value="{!c.id}"/>
+                                                    <apex:column headerValue="CaseNumber" value="{!c.CaseNumber}"/>
+                                                    <apex:column headerValue="Subject" value="{!c.Subject}"/>
+                                                    <apex:column headerValue="Priority" value="{!c.Priority}"/>
+                                                </apex:pageBlockTable>  
+                                            </apex:outputPanel>
+                                            <div  style="text-align:center;">
+                                                <apex:commandbutton value="Delete" action="{!deleteRecord}" styleclass="clr1"
+                                                                    reRender="pbId" rendered="{!IF(wrapperRecordList.size>0,'true','false')}"   style="background:white;width:120px;" id="btn"/>
+                                                <apex:commandbutton value="Update" action="{!updateRecord}"   rendered="{!IF(wrapperRecordList.size>0,'true','false')}" styleclass="clr2" style="background:white;width:120px; margin:10px; "/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSection>
+                                    <apex:pageBlockSection columns="1" id="section4">
+                                        <apex:facet name="header"><apex:outputLabel style="font-size:15px;"><img src="{!URLFOR($Resource.SLDS, 'icons/standard/task.png')}"  style="width: 1.3%; height: 20px;  " alt=""/>Task</apex:outputLabel></apex:facet>
+                                        <apex:outputText rendered="{! if(tsks==false,'true','false')}">No Task Found </apex:outputText>
+                                        <apex:outputPanel rendered="{!tsks}">
+                                            <apex:outputPanel style="text-align:center;" layout="block">
+                                                <apex:commandButton value="New Task" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;" />
+                                                <apex:commandButton value="Save" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                            </apex:outputPanel> 
+                                            <apex:outputPanel id="outpnl1" >
+                                                <apex:pageBlockTable value="{!tasks}" var="o"  rendered="{!showtasks}" title="tasks" >
+                                                    <apex:column >
+                                                        <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'taskCheckedone')"/></apex:facet>
+                                                        <apex:inputCheckbox id="taskCheckedone"/>                                
+                                                    </apex:column>
+                                                    <apex:column headerValue="Id" value="{!o.id}"/>
+                                                    <apex:column headerValue="Subject" value="{!o.Subject}"/>
+                                                    <apex:column headerValue="ActivityDate" value="{!o.ActivityDate}"/>
+                                                    <apex:column headerValue="Status" value="{!o.Status}"/>
+                                                </apex:pageBlockTable>
+                                            </apex:outputPanel>
+                                            <div  style="text-align:center;">
+                                                <apex:commandbutton value="Delete"  styleclass="clr1"
+                                                                    style="background:white;width:120px; margin:5px;" id="btn"/>
+                                                <apex:commandbutton value="Update"  styleclass="clr2" style="background:white;width:120px; margin:5px; "/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSection>       
+                                    <apex:pageBlockSection columns="1" id="section5">
+                                        <apex:facet name="header"><apex:outputLabel style="font-size:15px;"><img src="{!URLFOR($Resource.SLDS, 'icons/standard/event.png')}"  style="width: 1.5%; height: 20px;  " alt=""/>Event</apex:outputLabel></apex:facet>
+                                        <apex:outputText rendered="{! if(evnts==false,'true','false')}">No Event Found </apex:outputText>
+                                        <apex:outputPanel rendered="{!evnts}">
+                                            <apex:outputPanel style="text-align:center;" layout="block">
+                                                <apex:commandButton value="New Event" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;" />
+                                                <apex:commandButton value="Save" styleclass="commoncss" style="color:green;width:120px;margin:5px; background:#fafaf9;"/>
+                                            </apex:outputPanel> 
+                                            <apex:outputPanel id="outpnl1" >
+                                                <apex:pageBlockTable value="{!Events}" var="o"  rendered="{!showEvents}" title="events" >
+                                                    <apex:column >
+                                                        <apex:facet name="header"><apex:inputCheckbox onclick="checkAll(this,'eventCheckedone')"/></apex:facet>
+                                                        <apex:inputCheckbox id="eventCheckedone"/>                                
+                                                    </apex:column>
+                                                    <apex:column headerValue="Id" value="{!o.id}"/>
+                                                    <apex:column headerValue="Subject" value="{!o.Subject}"/>
+                                                    <apex:column headerValue="ActivityDate" value="{!o.ActivityDate}"/>
+                                                    <apex:column headerValue="Description" value="{!o.Description}"/>
+                                                    <apex:column headerValue="IsAllDayEvent" value="{!o.IsAllDayEvent}"/>
+                                                </apex:pageBlockTable>
+                                            </apex:outputPanel>
+                                            <div  style="text-align:center;">
+                                                <apex:commandbutton value="Delete"  styleclass="clr1" style="background:white;width:120px; margin:5px;" id="btn"/>
+                                                <apex:commandbutton value="Update"  styleclass="clr2" style="background:white;width:120px; margin:5px; "/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSection>    
+                                </apex:outputPanel>
+                            </apex:pageBlock>
+                        </apex:column>
+                        <!--   End related  -->
+                    </apex:pageBlockTable>
+                    <div class="delete" style="position:fixed;bottom:0px; left:0px;width:100%;">
+                        
+                        
+                        <div  style="text-align:center;" >
+                            <apex:commandbutton value="Delete"  onclick="checkForDelete('checkedone'); return false;" styleclass="clr1" reRender="pbId"  rendered="{!IF(wrapperRecordList.size>0,'true','false')}"   style="background:#9b2828; width:100px;color:white;" id="btn"/>
+                            <apex:commandbutton value="Update"  onclick="checkForUpdate('checkedone');" reRender="pbId"  rendered="{!IF(wrapperRecordList.size>0,'true','false')}" styleclass="clr2" style="background:#405123; width:100px; margin:10px;color:white; "/>
+                            <apex:commandbutton value="Create Task"  styleclass="clr2"  onclick="checkForTask('checkedone');"  reRender="pbid,showcreatetask"  style="background:#405123; width:100px;color:white;" />
+                            <apex:commandbutton value="Create Event" styleclass="clr2"  onclick="checkForEvent('checkedone');"  reRender="pbid,showcreateEvent"  style="background:#405123; width:100px; margin:10px;color:white; "/>
+                        </div>
+                        
+                        <!-- Action Buttons visible on bottom of page for pagination -->
+                        <apex:outputPanel style="text-align:center;color:black;" layout="block">
+                            <apex:commandButton value="First" reRender="pbId" action="{!first}" disabled="{!NOT(hasPrevious)}" status="paginationStatus"/>
+                            <apex:commandButton value="Previous" rerender="pbId" action="{!previous}" disabled="{!NOT(hasPrevious)}" status="paginationStatus"/>&nbsp;<apex:outputLabel style="color:white;">Page {!pageNumber} of {!totalPages}</apex:outputLabel>  &nbsp;
+                            <apex:commandButton value="Next" rerender="pbId" action="{!next}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>
+                            <apex:commandButton value="Last" rerender="pbId" action="{!last}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>
+                            <apex:actionStatus id="paginationStatus">
+                                <apex:facet name="start">
+                                    <apex:outputPanel style="color:white;">Please wait...<img src="/img/loading32.gif" style="width: 18px;"/></apex:outputPanel>
+                                </apex:facet>
+                            </apex:actionStatus>
+                        </apex:outputPanel>
+                    </div>
+                </div> 
+            </apex:pageBlock>  
+            <apex:pageBlock title="New Task"  Rendered="{!showTask}" id="showcreatetask">
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Save"  action="{!createTask}" reRender="theForm,showcreatetask"/>
+                </apex:pageBlockButtons>
+                <div style="">
+                    <apex:pageBlockSection title="Task Information" columns="2">	
+                        <apex:inputField value="{!myTask.OwnerId}"/>
+                        <apex:inputField value="{!myTask.Status}"/>
+                        <apex:inputField value="{!myTask.Description}"/>
+                        <apex:inputField value="{!myTask.ActivityDate}"/>
+                        <apex:inputField value="{!myTask.Priority}"/>
+                        
+                    </apex:pageBlockSection>
+                </div>
+            </apex:pageBlock> 
+            <apex:pageBlock title="New Event"  Rendered="{!showEvent}" id="showcreateEvent">
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="save"  action="{!createEvent}" reRender="theForm,showcreateEvent"/>
+                </apex:pageBlockButtons>
+                <div style="">
+                    <apex:pageBlockSection title="Event Information" columns="2">	
+                        <apex:inputField value="{!myEvent.OwnerId}"/>
+                        <apex:inputField value="{!myEvent.Location}"/>
+                        <apex:inputField value="{!myEvent.Subject}"/>
+                        <apex:inputField value="{!myEvent.StartDateTime}"/>
+                        <apex:inputField value="{!myEvent.EndDateTime}"/>                             
+                    </apex:pageBlockSection>
+                </div>
+            </apex:pageBlock> 
+        </apex:form>
+        
+        <script>
+        // Get modal element
+        var modal = document.getElementById('simpleModal');
+        // Get open modal button
+        var modalBtn = document.getElementById('modalBtn');
+        // Get close button
+        var closeBtn = document.getElementsByClassName('closeBtn')[0];
+        
+        // Listen for open click
+        modalBtn.addEventListener('click', openModal);
+        // Listen for close click
+        closeBtn.addEventListener('click', closeModal);
+        // Listen for outside click
+        window.addEventListener('click', outsideClick);
+        
+        // Function to open modal
+        function openModal(){
+            
+            modal.style.display = 'block';
+        }
+        
+        // Function to close modal
+        function closeModal(){
+            modal.style.display = 'none';
+        }
+        
+        // Function to close modal if outside click
+        function outsideClick(e){
+            if(e.target == modal){
+                modal.style.display = 'none';
+            }
+        }
+        </script>
+        
+        <script>
+        var modal = document.getElementById('simpleModal');
+        function save(){
+            saveFields();
+            modal.style.display = 'none';
+        }
+        
+        function closepop(){
+            cancel();
+            modal.style.display = 'none';
+        }
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            var isEscape = false;
+            if ("key" in evt) {
+                isEscape = (evt.key == "Escape" || evt.key == "Esc");
+            } else {
+                isEscape = (evt.keyCode == 27);
+            }
+            if (isEscape) {
+                modal.style.display = 'none';
+            }
+        };
+        </script>
+        
+        <script>
+        
+        function   checkForSearchRecords()
+        {
+            var inputvalue =document.getElementById('j_id0:theForm:searchInput').value;
+            if(inputvalue=='' || inputvalue==null)
+            {
+                window.alert("please Enter a Text");
+            }
+            else{      
+                searchRecords();
+            }  
+        }
+        function checkForDelete(cbid)
+        {
+            var inputElem = document.getElementsByTagName("input"); 
+            count=inputElem.length;
+            for(var i=0; i<inputElem.length; i++)
+            {            
+                if(inputElem[i].checked == false){
+                    count--;
+                }
+                
+            }
+            if(count==0)
+            {
+                window.alert("please select atleast a record");
+            }
+            else
+            {
+                deletefunction();
+                unCheckAll('checkedone');
+            }
+            
+        }
+        
+        function checkForUpdate(cbid)
+        {
+            var inputElem = document.getElementsByTagName("input"); 
+            count=inputElem.length;
+            for(var i=0; i<inputElem.length; i++)
+            {            
+                if(inputElem[i].checked == false){
+                    count--;
+                }
+                
+            }
+            if(count==0)
+            {
+                window.alert("please select atleast a record");
+            }
+            else
+            {
+                updateFunction();
+                unCheckAll('checkedone');
+            }
+            
+        }
+        
+        function checkForEvent(cbid)
+        {
+            var inputElem = document.getElementsByTagName("input"); 
+            count=inputElem.length;
+            for(var i=0; i<inputElem.length; i++)
+            {            
+                if(inputElem[i].checked == false){
+                    count--;
+                }
+                
+            }
+            if(count==0)
+            {
+                window.alert("please select atleast a record");
+            }
+            else
+            {
+                showEventMethod();
+                unCheckAll('checkedone');
+            }
+        }
+        
+        function checkForTask(cbid)
+        {
+            var inputElem = document.getElementsByTagName("input"); 
+            count=inputElem.length;
+            for(var i=0; i<inputElem.length; i++)
+            {            
+                if(inputElem[i].checked == false){
+                    count--;
+                }
+                
+            }
+            if(count==0)
+            {
+                window.alert("please select atleast a record");
+            }
+            else
+            {
+                showTaskMethod();
+                unCheckAll('checkedone');
+            }
+        }
+        </script>
+        <script>
+        function selectContactJavaScript()
+        {
+            
+            selectContactActionFunction() ;
+        }
+        </script>  
+        <script>
+        function deleteContactJavaScript()
+        {
+            
+            deleteContactActionFunction() ;
+        }
+        </script> 
+        <script type="text/javascript">
+        
+        function cancelRecord() {
+            cancelFunction();
+            return false;
+        }
+        </script>
+        <script type="text/javascript">
+        function checkAll(cb,cbid)
+        {
+            var inputElem = document.getElementsByTagName("input");                     
+            for(var i=0; i<inputElem.length; i++)
+            {             
+                if(inputElem[i].id.indexOf(cbid)!=-1){                                        
+                    inputElem[i].checked = cb.checked;
+                }
+            }
+        }
+        //Future Implementation
+        /* function uncheckMaster(cb,cbid)
+           {
+            var inputElem = document.getElementsByTagName("input");                               
+            
+            for(var i=0; i<inputElem.length; i++)
+              {             
+                 if(inputElem[i].id.indexOf(cbid)!=-1){                                        
+                    inputElem[i].checked = false;
+                }
+              }           
+           }
+       */
+        </script>
+        <script type="text/javascript">
+        function unCheckAll( cbid)
+        {
+            var inputElem = document.getElementsByTagName("input");                     
+            for(var i=0; i<inputElem.length; i++)
+            {             
+                if(inputElem[i].id.indexOf(cbid)!=-1){                                        
+                    inputElem[i].checked = false;
+                }
+            }
+        }
+        
+        </script>
+        
+    </html>
+    
+</apex:page>

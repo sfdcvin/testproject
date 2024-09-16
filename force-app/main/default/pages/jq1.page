@@ -1,0 +1,24 @@
+<apex:page >
+    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+        
+        <script>
+        
+        
+     var j$=jQuery.noConflict();
+        	j$(document).ready(function(){
+            	j$('[Id$=name]').change(function(){
+                	var name=j$('[Id$=name]').val();
+                	j$('[Id$=phone]').val(name);
+                });
+            });
+        
+        </script>
+    <apex:form >
+    
+    
+           Enter name:<apex:inputText id="name"  />
+            your  name:<apex:inputText id="phone"  />
+        
+        </apex:form>
+</apex:page>

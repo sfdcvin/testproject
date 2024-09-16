@@ -1,0 +1,11 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+     <head>
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <apex:form id="one">
+       
+    <apex:pageBlock title="BootstrapDemoBootstrapDemoBootstrapDemoBootstrapDemo">
+    <apex:commandButton styleClass=" btn btn-danger"  value="Submit" reRender="one" />
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

@@ -1,0 +1,8 @@
+<apex:page standardController="contact" tabStyle="Opportunity">
+    
+        
+            <apex:outputlabel value="{!contact.firstname}"/>
+          
+        
+   
+</apex:page>

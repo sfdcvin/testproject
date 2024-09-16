@@ -1,0 +1,10 @@
+<apex:page >
+<apex:pageBlock id="block1">
+    <apex:pageBlockSection id="section1" columns="2" collapsible="true" title="Title">
+        Example Area
+    </apex:pageBlockSection>
+    <font color="#FF0000"><script>
+        twistSection(document.getElementById('{!$Component.block1.section1}').getElementsByTagName('img')[0])
+    </script></font>
+</apex:pageBlock>
+</apex:page>

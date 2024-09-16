@@ -1,0 +1,4 @@
+<apex:page controller="jsonPractice">
+    {!name}<br/>
+    {!acc}
+</apex:page>

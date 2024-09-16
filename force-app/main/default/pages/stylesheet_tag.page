@@ -1,0 +1,19 @@
+<apex:page StandardController="Account">
+   <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <apex:form >
+        
+      <apex:pageBlock title="AccountName">
+       
+                     
+                          
+                            <apex:outputField value="{!Account.Id}"/>
+                            <apex:outputField value="{!Account.Name}"/>
+                           
+                 
+  
+
+         </apex:pageBlock>
+        </apex:form>
+    
+</apex:page>

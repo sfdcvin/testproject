@@ -1,0 +1,11 @@
+<apex:page controller="ActionPoolerExample" >
+    <apex:form >
+        <apex:actionPoller action="{!callMethod}" interval="5" reRender="pb" />
+        <apex:pageBlock id="pb">
+            Lead Count: &nbsp;    <apex:outputText value="{!leadCount}"/> <br/>
+             Case Count: &nbsp;    <apex:outputText value="{!CaseCount}"/> <br/>
+             Opportunity Count: &nbsp;    <apex:outputText value="{!OpportunityCount}"/> <br/>
+             Account Count: &nbsp;    <apex:outputText value="{!AccountCount}"/>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

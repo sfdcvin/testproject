@@ -1,0 +1,15 @@
+<apex:page controller="Deserialize_strict">
+    
+    
+    {!obj.name} &nbsp;&nbsp; {!obj.country} &nbsp;&nbsp;{!obj.sex} 
+    <apex:pageBlock > 
+        <apex:pageBlockTable value="{!mymap}"  var="a">
+            <apex:column value="{!a}" headervalue="Key" />
+            <apex:column value="{!mymap[a]}"  headervalue="Value"/>
+            
+        
+        </apex:pageBlockTable>
+    
+    
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,6 @@
+<aura:component >
+	  <aura:attribute name="record" type="Camping_Item__c" 
+    default="{ 'sobjectType': 'Camping_Item__c', 'Name':'Bodacious It Hub','Quantity__c': 5, 'Price__c': 4.99,'Packed__c':true }" />
+    
+    <c:campingListItem item="{!v.record}" />
+</aura:component>

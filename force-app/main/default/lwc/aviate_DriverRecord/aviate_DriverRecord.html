@@ -1,0 +1,651 @@
+<!--***********************************************************************************
+Lightning Component Name :     aviate_CriminalRecord
+Author                   :     Leela Krishna Reddy
+Created Date             :     24/08/2021
+************************************************************************************-->
+<template>
+  <div>
+    <div
+      class="slds-page-header headerclass"
+      style="background-color: #0c2340; color: white"
+    >
+      <div>
+        <span style="float: left; width: 25%; text-align: left">
+          <lightning-icon
+            icon-name="utility:back"
+            class="back_icon"
+            alternative-text="Back"
+            size="small"
+            title="Back"
+            style="
+              --sds-c-icon-color-foreground-default: #ffffff;
+              cursor: pointer;
+            "
+            onclick={onclickBack}
+          ></lightning-icon
+        ></span>
+        <span style="float: left; width: 50%; text-align: left">
+          <h2 class="mainHeader" style="text-align: center; font-weight: 600">
+            Driver's Record
+          </h2>
+        </span>
+        <template if:false={isConfirmationPage}>
+          <span style="float: right; width: 25%">
+            <h2
+              class="sideText"
+              onclick={onClickSubmit}
+              style="cursor: pointer; float: right"
+            >
+              Save &amp; Exit &nbsp;
+            </h2></span
+          >
+        </template>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div style="margin-left: 1rem; margin-right: 1rem">
+      <template if:false={isConfirmationPage}>
+        <lightning-progress-bar
+          class="progressBarClass"
+          value={progress}
+        ></lightning-progress-bar>
+      </template>
+      <template if:true={isConfirmationPage}>
+        <div
+          class="slds-progress-bar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow={progress}
+          role="progressbar"
+        >
+          <span class="slds-progress-bar__value"> </span>
+        </div>
+      </template>
+      <h3 style="float: right">{progress}%</h3>
+      <template if:true={isConfirmationPage}>
+        <lightning-icon
+          class="iconSuccessClassCSS"
+          icon-name="utility:success"
+          alternative-text="Success!"
+          variant="success"
+          title="Success"
+          size="xx-small"
+        ></lightning-icon>
+      </template>
+      <br />
+
+      <template if:true={isVoilationCheck}>
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving voilations/infractions</h2>
+          <br />
+        </div>
+        <div class="demo-only demo-only" style="height:6rem;background-color:#16325c;position:relative">
+          <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_inverse">
+              <span class="slds-assistive-text">Loading</span>
+              <div class="slds-spinner__dot-a"></div>
+              <div class="slds-spinner__dot-b"></div>
+            </div>
+          </div>
+        </div>
+        <lightning-radio-group
+          name="radioGroup"
+          label={label.VoilationRadio}
+          class="input_radio_Class"
+          options={options}
+          data-id="voilationCheck"
+          onchange={handleInputChange}
+          value={VoilationCheckValue}
+          type="radio"
+        ></lightning-radio-group>
+        <br />
+      </template>
+      <!-- This is the second page-->
+
+      <template if:true={isVoilationEntry}>
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving voilations/infractions</h2>
+          <br />
+        </div>
+        <div class="slds-form-element">
+          <lightning-input
+            type="date"
+            data-id="voilationDate"
+            value={voilationEntry.voilationDate}
+            class="inputData"
+            name="voilationDate"
+            date-style="short"
+            placeholder="MM/DD/YYYY"
+            label="Voilation/infraction date"
+            onchange={handleInputChange}
+          ></lightning-input>
+        </div>
+        <br />
+        <div class="slds-form-element">
+          <lightning-input
+            type="text"
+            data-id="county"
+            class="inputData"
+            name="county"
+            value={voilationEntry.county}
+            label="County"
+            date-style="short"
+            onchange={handleInputChange}
+            placeholder="Enter text here"
+          ></lightning-input>
+        </div>
+        <br />
+
+        <div class="slds-form-element">
+          <lightning-input
+            type="text"
+            data-id="city"
+            class="inputData"
+            name="city"
+            value={voilationEntry.city}
+            label="City"
+            date-style="short"
+            onchange={handleInputChange}
+            placeholder="Enter text here"
+          ></lightning-input>
+        </div>
+        <br />
+        <div class="form-group">
+          <lightning-combobox
+            class="comboboxCSS"
+            name="state"
+            data-id="state"
+            label="State"
+            value={voilationEntry.state}
+            placeholder="Select one"
+            onchange={handleInputChange}
+            options={stateOptions}
+          >
+          </lightning-combobox>
+        </div>
+        <br />
+        <div class="slds-form-element">
+          <lightning-textarea
+            type="text"
+            data-id="disposition"
+            class="inputData"
+            name="disposition"
+            value={voilationEntry.disposition}
+            label="Disposition/outcome"
+            date-style="short"
+            onchange={handleInputChange}
+            placeholder="Enter text here"
+          ></lightning-textarea>
+        </div>
+      </template>
+      <!-- This is the Third page-->
+
+      <template if:true={isVoilationCard}>
+        <!--<div class="slds-text-heading_medium slds-hyphenate">
+<h2 class="confirmPageHeader">College education History</h2>
+<p style="">Please add education you have completed or are currently pursuing</p>
+
+</div> -->
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving voilations/infractions</h2>
+          <br />
+        </div>
+        <template for:each={voilationEntries} for:item="item" for:index="index">
+          <div key={item.id} style="padding: 15px; border-radius: 2em">
+            <lightning-card
+              class="slds-card_align_absolute-center"
+              padding="around-small"
+              style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              "
+            >
+              <lightning-layout>
+                <lightning-layout-item
+                  style="margin-left: 10px; width: 90%; float: left"
+                >
+                  <div class="card_wrapper" style="margin-left: 10px">
+                    <span
+                      style="
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 24px;
+                      "
+                      >{item.voilationDate}</span
+                    ><br />
+                    <span
+                      style="
+                        font-size: 16px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.statelabel},</span
+                    >&nbsp;<span
+                      style="
+                        font-size: 18px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.city}</span
+                    ><br />
+                  </div>
+                </lightning-layout-item>
+                <lightning-layout-item
+                  style="margin-right: 10px; width: 10%; float: right"
+                  data-id={index}
+                  name="voilationCardClick"
+                  onclick={onClickCard}
+                  class="card"
+                >
+                  <div>
+                    <span>
+                      <lightning-icon
+                        class="iconClassCSS"
+                        icon-name="utility:chevronright"
+                      ></lightning-icon
+                    ></span>
+                  </div>
+                </lightning-layout-item>
+              </lightning-layout>
+            </lightning-card>
+            <!--   <h3 style="float:right;cursor: pointer;font-size: inherit;color:blue;text-decoration: underline; " access-key={item.id} id={index}>Delete</h3> -->
+            <lightning-button
+              class="lightningButtonCss"
+              value={index}
+              variant="base"
+              onclick={removeRow}
+              alternative-text="Delete"
+              label="Delete"
+              >Delete</lightning-button
+            >
+          </div>
+        </template>
+        <div
+          style="
+            float: left;
+            cursor: pointer;
+            font-size: inherit;
+            color: blue;
+            margin-left: 20px;
+            text-align: center;
+            height:24px;
+            display: flex;
+          "
+          onclick={addMoreVoilation}
+        >
+				<span  ><lightning-icon class='fillcolor' size="small"   icon-name="utility:add" alternative-text="Add" title="Add"
+					></lightning-icon></span> &nbsp;    
+          <span   style=" color: #6244bb;width:35px;font-size:20px;font-weight:600px;letter-spacing:0;text-decoration: underline;">Add</span>
+   
+        </div>
+        <br /><br />
+      </template>
+
+      <!--fourth page-->
+
+      <template if:true={isImpairedCheck}>
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving while impared</h2>
+          <br />
+        </div>
+        <lightning-radio-group
+          name="radioGroup"
+          label={label.DrivingWhileImpairedRadio}
+          class="input_radio_Class"
+          options={options}
+          data-id="impairedCheck"
+          onchange={handleInputChange}
+          value={ImpairedCheckValue}
+          type="radio"
+        >
+        </lightning-radio-group>
+        <br />
+      </template>
+
+      <!--Fifth Page-->
+      <template if:true={isImpairedEntry}>
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving while impaired</h2>
+          <br />
+        </div>
+        <div class="slds-form-element">
+          <lightning-input
+            type="date"
+            data-id="impairedDate"
+            value={impairedEntry.impairedDate}
+            class="inputData"
+            name="impairedDate"
+            date-style="short"
+            placeholder="MM/DD/YYYY"
+            label="Date"
+            onchange={handleInputChange}
+          ></lightning-input>
+        </div>
+        <br />
+        <div class="slds-form-element">
+          <lightning-textarea
+            type="text"
+            data-id="impairedDescription"
+            class="inputData"
+            name="impairedDescription"
+            value={impairedEntry.impairedDescription}
+            label="Description"
+            onchange={handleInputChange}
+            placeholder="Enter text here"
+          ></lightning-textarea>
+        </div>
+        <br />
+      </template>
+
+      <!--Sixth Page, Impaired Card-->
+      <template if:true={isImpairedCard}>
+        <!--<div class="slds-text-heading_medium slds-hyphenate">
+<h2 class="confirmPageHeader">College education History</h2>
+<p style="">Please add education you have completed or are currently pursuing</p>
+
+</div> -->
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <h2 class="confirmPageHeader">Driving while impaired</h2>
+          <br />
+        </div>
+        <template for:each={impairedEntries} for:item="item" for:index="index">
+          <div key={item.id} style="padding: 15px; border-radius: 2em">
+            <lightning-card
+              class="slds-card_align_absolute-center"
+              padding="around-small"
+              style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              "
+            >
+              <lightning-layout>
+                <lightning-layout-item
+                  style="margin-left: 10px; width: 90%; float: left"
+                >
+                  <div class="card_wrapper" style="margin-left: 10px">
+                    <span
+                      style="
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 24px;
+                      "
+                      >{item.impairedDate}</span
+                    ><br />
+                    <span
+                      style="
+                        font-size: 16px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.impairedDescription}</span
+                    ><br />
+                  </div>
+                </lightning-layout-item>
+                <lightning-layout-item
+                  style="
+                    margin-right: 10px;
+                    width: 10%;
+                    float: right;
+                    text-align: center;
+                  "
+                  data-id={index}
+                  name="impairedCardClick"
+                  onclick={onClickImpairedCard}
+                  class="card"
+                >
+                  <div>
+                    <span>
+                      <lightning-icon
+                        class="iconClassCSS"
+                        icon-name="utility:chevronright"
+                      ></lightning-icon
+                    ></span>
+                  </div>
+                </lightning-layout-item>
+              </lightning-layout>
+            </lightning-card>
+            <!--   <h3 style="float:right;cursor: pointer;font-size: inherit;color:blue;text-decoration: underline; " access-key={item.id} id={index}>Delete</h3> -->
+            <lightning-button
+              class="lightningButtonCss"
+              value={index}
+              variant="base"
+              onclick={removeImpairedRow}
+              alternative-text="Delete"
+              label="Delete"
+              >Delete</lightning-button
+            >
+          </div>
+        </template>
+        <div
+          style="
+            float: left;
+            cursor: pointer;
+            font-size: inherit;
+            color: blue;
+            margin-left: 20px;
+            text-align: center;
+          "
+          onclick={addMoreImpaired}
+        >
+          <span style="font-size: 30px; color: #6244bb">+</span> &nbsp;
+          <span
+            style="text-decoration: underline; font-size: 18px; color: #6244bb"
+            >Add</span
+          >
+        </div>
+        <br /><br /> </template
+      ><br />
+      <template if:true={isConfirmationPage}>
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <label class="confirmPageHeader">Driving voilations/infractions</label>
+        </div>
+        <div style="font-size:13px;line-height: 18px; color: #333333;margin-top:16px;">{label.VoilationRadio}</div>
+
+       <div style="font-size:18px;font-weight: 600;line-height: 18px;color: #333333;margin-top:8px;"> {VoilationCheckValue}</div>
+        
+        <template for:each={voilationEntries} for:item="item" for:index="index">
+          <div key={item.id} style="border-radius: 6px;margin-top:16px;border: 1px solid #E6E6E6;">
+            <lightning-card
+              class="slds-card_align_absolute-center"
+              style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              "
+            >
+              <lightning-layout>
+                <lightning-layout-item
+                  style="margin-left: 10px; width: 90%; float: left"
+                >
+                  <div class="card_wrapper" style="margin-left: 10px">
+                    <span
+                      style="
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 24px;
+                      "
+                      >{item.voilationDate}</span
+                    ><br />
+                    <span
+                      style="
+                        font-size: 16px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.statelabel},</span
+                    >&nbsp;<span
+                      style="
+                        font-size: 18px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.city}</span
+                    ><br />
+                  </div>
+                </lightning-layout-item>
+                <lightning-layout-item
+                  style="margin-right: 10px; width: 10%; float: right"
+                  data-id={index}
+                  name="voilationCardClick"
+                  class="card"
+                >
+                  <!--  <div  >
+            <span style="color:blue;font-size:30px;text-align:center">></span>
+            </div>   -->
+                </lightning-layout-item>
+              </lightning-layout>
+            </lightning-card>
+            <!--   <h3 style="float:right;cursor: pointer;font-size: inherit;color:blue;text-decoration: underline; " access-key={item.id} id={index}>Delete</h3> -->
+            <!--  <lightning-button style="float:right;cursor: pointer;color:blue;text-decoration: underline; "  value={index} variant="base" onclick={removeRow} alternative-text="Delete" label="Delete" >Delete</lightning-button>  -->
+          </div>
+        </template>
+     <!--   <hr />  -->
+     <div style="border:0.5px solid #E6E6E6;;margin-top:23.5px;margin-bottom:23.5px;"></div>
+
+        <div class="slds-text-heading_medium slds-hyphenate">
+          <label class="confirmPageHeader">Driving while impaired</label>
+        </div>
+        <div style="font-size:13px;line-height: 18px; color: #333333;margin-top:16px;"> {label.DrivingWhileImpairedRadio} </div>
+        <div style="font-size:18px;font-weight: 600;line-height: 18px;color: #333333;margin-top:8px;"> {ImpairedCheckValue}</div><br />
+        <template for:each={impairedEntries} for:item="item" for:index="index">
+          <div key={item.id} style="border-radius: 6px;margin-top:16px;border: 1px solid #E6E6E6;">
+            <lightning-card
+              class="slds-card_align_absolute-center"
+              padding="around-small"
+              style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              "
+            >
+              <lightning-layout>
+                <lightning-layout-item
+                  style="margin-left: 10px; width: 90%; float: left"
+                >
+                  <div class="card_wrapper" style="margin-left: 10px">
+                    <span
+                      style="
+                        font-size: 18px;
+                        font-weight: 600;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 24px;
+                      "
+                      >{item.impairedDate}</span
+                    ><br />
+                    <span
+                      style="
+                        font-size: 16px;
+                        color: #333333;
+                        letter-spacing: 0;
+                        line-height: 22px;
+                      "
+                      >{item.impairedDescription}</span
+                    ><br />
+                  </div>
+                </lightning-layout-item>
+                <lightning-layout-item
+                  style="
+                    margin-right: 10px;
+                    width: 10%;
+                    float: right;
+                    text-align: center;
+                  "
+                  data-id={index}
+                  name="impairedCardClick"
+                  class="card"
+                >
+                  <div></div>
+                </lightning-layout-item>
+              </lightning-layout>
+            </lightning-card>
+            <!--   <h3 style="float:right;cursor: pointer;font-size: inherit;color:blue;text-decoration: underline; " access-key={item.id} id={index}>Delete</h3> -->
+            <!--  <lightning-button style="float:right;cursor: pointer;color:blue;text-decoration: underline; "  value={index} variant="base" onclick={removeImpairedRow} alternative-text="Delete" label="Delete" >Delete</lightning-button>  -->
+          </div> </template
+        ><br /><br /><br/>
+      </template>
+    </div>
+    <br /><br />
+    <template if:false={isConfirmationPage}>
+      <div style="opacity: 0.4">
+        <div class={nextButtonClassShow}>
+          <div>
+            <h2
+              style="
+                font-size: medium;
+                text-align: center;
+
+                font-size: 18px;
+                cursor: pointer;
+                font-weight: 600;
+              "
+            >
+              Next
+            </h2>
+          </div>
+
+          <div style="clear: both"></div>
+        </div>
+      </div>
+      <div
+        class={nextButtonClassHide}
+        style="background-color: rgb(98, 68, 187)"
+        onclick={onclickNext}
+      >
+        <div>
+          <h2
+            style="
+              font-size: medium;
+              text-align: center;
+              color: #ffffff;
+              font-size: 18px;
+              cursor: pointer;
+              font-weight: 600;
+            "
+          >
+            Next
+          </h2>
+        </div>
+      </div>
+    </template>
+    <template if:true={isConfirmationPage}>
+      <div
+        class={nextButtonClassHide}
+        style="background-color: rgb(98, 68, 187)"
+        onclick={onClickSubmit}
+      >
+        <div>
+          <h2
+            style="
+              font-size: medium;
+              text-align: center;
+              color: #ffffff;
+              font-size: 18px;
+              cursor: pointer;
+              font-weight: 600;
+            "
+          >
+            Submit
+          </h2>
+        </div>
+      </div>
+    </template>
+    <div style="clear: both"></div>
+  </div>
+</template>

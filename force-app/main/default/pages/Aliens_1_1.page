@@ -1,0 +1,13 @@
+<apex:page controller="Aliens_1">
+    <apex:form >
+    <apex:inputText value="{!name}"/> &emsp;&emsp;&emsp;&emsp;
+    <apex:commandButton value="Search" action="{!search}"/>
+        <apex:pageBlock rendered="{! !ISNULL(acc)}">
+            <apex:pageBlockTable value="{!acc}" var="a">
+              
+               <apex:column value="{!a.name}"/>
+            </apex:pageBlockTable>
+       
+        </apex:pageBlock>
+    </apex:form>
+    </apex:page>

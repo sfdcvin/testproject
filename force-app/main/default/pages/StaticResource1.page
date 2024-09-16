@@ -1,0 +1,5 @@
+<apex:page >
+    <apex:pageBlock title="StaticResouiceTesting">
+      <apex:image url="{!$Resource.myImage1}" width="500" height="500"/>
+    </apex:pageBlock>
+</apex:page>

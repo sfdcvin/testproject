@@ -1,0 +1,8 @@
+<apex:component >
+    <apex:attribute name="accData" type="contact[]" description="asdfghjkl"  />
+    <apex:pageBlock >
+    <apex:pageBlockTable value="{!accData}" var="a">
+        <apex:column value="{!a.firstname}" />        
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:component>

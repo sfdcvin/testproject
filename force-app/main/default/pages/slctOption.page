@@ -1,0 +1,23 @@
+<apex:page controller="slctOption">
+    <apex:form >
+        <apex:selectList size="1" value="{!course}">
+            <apex:selectOption itemLabel="--select Option--" itemValue="--null--" />
+            <apex:selectOption itemLabel="java" itemValue="java" />
+            <apex:selectOption itemLabel="php" itemValue="php" />
+            <apex:selectOption itemLabel="oops" itemValue="oops" />
+            
+        
+        </apex:selectList>
+        <apex:commandButton value="Submit" action="{!submit}" />
+        
+        <apex:pageBlock rendered="{! flag}">
+        <apex:outputText value="{!course} "/> 
+            </apex:pageBlock>
+            
+            
+        
+    
+    
+    
+    </apex:form>
+</apex:page>

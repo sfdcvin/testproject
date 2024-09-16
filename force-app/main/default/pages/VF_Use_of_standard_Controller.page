@@ -1,0 +1,15 @@
+<apex:page standardcontroller="Account">
+    <apex:form >
+       
+        <apex:outputLabel >Name</apex:outputLabel>
+        <apex:inputField value="{!account.name}" label="Name"/><br/>
+        <apex:outputLabel >Rating</apex:outputLabel>
+        <apex:inputField value="{!account.rating}" label="Rating"/><br/>
+        <apex:outputLabel >State</apex:outputLabel>
+        <apex:inputField value="{!account.state__c}" label="State"/><br/>
+        <apex:outputLabel >GSTIN</apex:outputLabel>
+        <apex:inputField value="{!account.GSTN__c}" label="GSTIN"/><br/>
+            <apex:commandButton action="{!save}" value="Save" />
+       
+    </apex:form>
+</apex:page>

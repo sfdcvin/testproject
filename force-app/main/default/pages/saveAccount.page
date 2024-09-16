@@ -1,0 +1,8 @@
+<apex:page standardController="contact" extensions="customcontact">
+    <apex:form >
+    <apex:inputText value="{! contact.firstname}"/>
+        <apex:inputText value="{! contact.lastname}"/>
+    <apex:commandButton value="save" action="{!save}"/>
+        </apex:form>
+    {!function}
+</apex:page>

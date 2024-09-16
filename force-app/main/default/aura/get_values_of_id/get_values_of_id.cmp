@@ -1,0 +1,6 @@
+<aura:component >
+    <ui:inputText label="FirstName" aura:id="fname"/>
+    <ui:inputText label="LastName" aura:id="lname"/>
+    <ui:inputText aura:id="myname"/>
+    <ui:button label="submit" press="{!c.call}"/>
+</aura:component>

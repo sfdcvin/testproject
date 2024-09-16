@@ -1,0 +1,45 @@
+<apex:page standardcontroller="Account" lightningStylesheets="true" sidebar="false" extensions="Practice_Visualforce_Apex" >
+    <apex:form >
+        <div  style="display: flex;justify-content: center;align-items: center;width: 30%;height: 20vh;">     
+            <apex:outputLabel value="Enter GST Number" /> &nbsp;
+            <apex:inputText value="{!gstin}"/>&nbsp;
+            <apex:commandButton action="{!retDate}" value="Search"   />             
+        </div>
+        {!RecordTypeName.name}
+
+      <apex:outputPanel id="rr">
+            <apex:pageBlock rendered="{!dupTable}">
+                <apex:pageBlockTable value="{!accn}"  var="a">
+                    <apex:column >
+                        <apex:outputLink value="/{!a.Id}" target="_blank">{!a.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!a.GSTN__c}"/>
+                    <apex:column value="{!a.owner.name}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+          
+            <apex:pageBlock rendered="{!newRecord}" >
+                <apex:pageBlockSection title="GSTIN Information"  >
+                    <apex:outputText value="{!Account.Description}"   />
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Description"/>
+                        <apex:outputText value="{!Account.Description}" />
+                    </apex:pageBlockSectionItem>                    
+                    
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Account Information">
+                    <apex:inputText value="{!Account.name}" rendered="{!Account.recordType == 'A'}"/>
+                    <apex:inputField value="{!Account.state__c}"/>
+                    <apex:inputField value="{!Account.rating}"/>
+                    <apex:inputField value="{!Account.GSTN__c}"/>                    
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons >
+                    <apex:commandButton action="{!save}" value="Save" /> 
+                    <apex:commandButton action="{!Cancel}" value="Cancel" />                    
+                </apex:pageBlockButtons> 
+                
+            </apex:pageBlock>  
+        </apex:outputPanel> 
+    </apex:form>
+</apex:page>

@@ -1,0 +1,100 @@
+<aura:component controller="campingListController">
+	<aura:attribute name="items" type="Camping_Item__c[]"/> 
+
+      <aura:attribute name="newItem" type="Camping_Item__c"
+         default="{ 'sobjectType': 'Camping_Item__c',
+                        'Name': '',
+                        'Price__c': 0,
+                        'Quantity__c': 0,
+                         'Packed__c':false
+                        }"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem >
+            <lightning:icon iconName="action:goal" alternativeText="My Expenses"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label"><h1 >Camping List</h1></h1>
+                <h2 class="slds-text-heading--medium"><h1 >My Camping List</h1></h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+     <lightning:layout >
+        <lightning:layoutItem padding="around-small" size="6">
+        <!-- [[ expense form goes here ]] -->
+            <div aria-labelledby="newexpenseform">
+        <!-- BOXED AREA -->
+        <fieldset class="slds-box slds-theme--default slds-container--small">
+        <legend id="newexpenseform" class="slds-text-heading--small 
+          slds-p-vertical--medium">
+          Add Camping Item
+        </legend>
+  
+        <!-- CREATE NEW EXPENSE FORM -->
+        <form class="slds-form--stacked">          
+            <lightning:input aura:id="Campingform" label="Item Name"
+                             name="Itemname"
+                             value="{!v.newItem.Name}"
+                             required="true"/> 
+            <lightning:input type="number" aura:id="Campingform" label="Price"
+                             name="CampingPrice"
+                             min="0"
+                             formatter="currency"
+                             step="0.01"
+                             value="{!v.newItem.Price__c}"
+                             messageWhenRangeUnderflow="Enter an amount that's at least $0.10."/>
+            <lightning:input aura:id="Campingform" label="Quantity"
+                             name="CampingQuantity"
+                              min="1" 
+                             value="{!v.newItem.Quantity__c}"
+                             type="number"
+                             />
+            
+            
+            
+            <lightning:input type="checkbox" aura:id="Campingform" label="Packed?"  
+                         name="Packed"
+                         checked="{!v.newItem.Packed__c}"/>
+            
+           <lightning:button label="Create Camping Item" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                             onclick="{!c.clickCreateItem}"/>   
+           
+        </form>
+        <!-- / CREATE NEW EXPENSE FORM -->
+  
+      </fieldset>
+      <!-- / BOXED AREA -->
+    </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+   <!-- <c:campingListItem items="{!v.items}"/>  -->
+    
+    <lightning:card title="Camping Items">
+        <p class="slds-p-horizontal--small">
+            <aura:iteration items="{!v.items}" var="item">
+                
+                
+            <!--     <c:campingItem item="{!item}" />   -->
+                
+                <lightning:card title="{!item.Name}" iconName="standard:scan_card" >
+                   
+        
+        <p class="slds-text-heading--medium slds-p-horizontal--small">
+           Price: <lightning:formattedNumber value="{!item.Price__c}" style="currency"/>
+        </p>
+        <p class="slds-p-horizontal--small">
+           Quantity :  value="{!item.Quantity__c}" 
+        </p>
+        <p>
+            
+        </p>
+    </lightning:card>
+            </aura:iteration>
+        </p>
+    </lightning:card>
+</aura:component>

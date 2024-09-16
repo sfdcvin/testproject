@@ -1,0 +1,5 @@
+<apex:page >
+    <apex:form >
+        <apex:commandLink value="Download Account Data" action="{!URLFOR($Page.DownloadAccountExcel)}"/>
+    </apex:form>
+</apex:page>

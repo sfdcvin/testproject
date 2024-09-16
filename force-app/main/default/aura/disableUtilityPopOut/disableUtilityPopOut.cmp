@@ -1,0 +1,28 @@
+<aura:component controller="disableUtilityPopOutApex" implements="flexipage:availableForAllPageTypes" access="global">
+        Enter a number: <ui:inputText aura:id="inputCmp" onError="{!c.handleError}" onClearErrors="{!c.handleClearError}"/> <br/>
+        Enter a number: <ui:inputText aura:id="inputCmp1" onError="{!c.handleError}" onClearErrors="{!c.handleClearError}"/> <br/>
+    <aura:attribute name="showError" type="boolean" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+ <aura:attribute name="errorMessage" type="string" />
+    <ui:button label="Submit" press="{!c.doAction}"/>
+     <lightning:button label="throw error" onclick="{!c.throwError}"/>
+    <lightning:navigationItemAPI aura:id="navigationItem" />
+    <lightning:workspaceAPI aura:id="workspace" />
+    <lightning:utilityBarAPI aura:id="utilityBar" />
+    <lightning:button label="Focus Navigation Item" onclick="{!c.focusNavigationItem }" />
+    <lightning:button label="Open Utility" onclick="{!c.openUtilityBar }"/>
+    <lightning:button label="Open Tab" onclick="{!c.openTab }" />
+    <lightning:utilityBarAPI aura:id="utilitybar" /><br/>
+    <lightning:button label="Disable Utility Pop-Out" onclick="{! c.disableUtilityPopOut }" /><br/><br/>
+     <aura:if isTrue="{!v.showError}">
+        <!-- Show the message to ui -->
+        <div class="slds-notify slds-notify_toast slds-theme_error">
+            <span class="slds-assistive-text">error</span>
+            <div class="slds-notify__content">
+                <h5 class="slds-text-heading_small slds-align_absolute-center">Error Message </h5>
+                <br/>
+                <p class="slds-align_absolute-center">{!v.errorMessage}vvvvvvvvvvvvvvvvvvvvvvvvvv</p>                
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

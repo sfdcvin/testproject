@@ -1,0 +1,17 @@
+<template>
+    <lightning-button label="Navigate to LWC" onclick={navigateLWC} ></lightning-button>
+    {count}
+<template if:true={conRecs} >
+<lightning-input lable ="Enter Search Name" onchange={callMe} type="text"></lightning-input>
+<lightning-datatable
+    key-field="Id"
+data={conRecs}
+columns={concolumns}
+
+>
+</lightning-datatable>
+
+</template>
+
+
+</template>

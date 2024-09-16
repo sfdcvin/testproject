@@ -1,0 +1,20 @@
+<apex:page >
+    
+    <script>
+    
+         function call(s)
+        {
+              
+           alert(s);
+        
+        }
+    
+        
+    </script>
+    <button  onclick="call('vineet')">
+            click
+        </button>
+    
+    
+    
+</apex:page>

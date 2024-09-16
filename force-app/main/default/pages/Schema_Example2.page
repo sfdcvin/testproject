@@ -1,0 +1,13 @@
+<apex:page controller="Schema_Example2">
+      <apex:form >
+    <apex:pageBlock title="Schema">
+       <apex:pageBlockTable value="{!resMap}" var="a">
+           <apex:column value="{!a}" headervalue="Properties"/>
+           <apex:column value="{!resMap[a]}" headervalue="value"/>
+        
+        
+        </apex:pageBlockTable>
+    
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

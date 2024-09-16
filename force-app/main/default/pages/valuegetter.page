@@ -1,0 +1,15 @@
+<apex:page >
+    <apex:sectionHeader title="New Customer" subtitle="Customer" help="https://www.google.co.in/?gfe_rd=cr&dcr=0&ei=BoOWWpiREIjy8AfAxY9Y"/>
+       <apex:pageBlock title="Contact Detail" tabStyle="Contact" >
+           aaaaaaaaaaaaaaaaaaaaa<br/>
+           bbbbbbbbbbbbbbbbbbbbb<br/>
+           ccccccccccccccccccccc<br/>
+    
+    
+    </apex:pageBlock>
+    <apex:pageBlock title="Education" >
+           aaaaaaaaaaaaaaaaaaaaa<br/>
+           bbbbbbbbbbbbbbbbbbbbb<br/>
+           ccccccccccccccccccccc<br/>
+    </apex:pageBlock>
+</apex:page>

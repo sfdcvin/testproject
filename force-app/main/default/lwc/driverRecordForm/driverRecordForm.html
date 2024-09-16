@@ -1,0 +1,24 @@
+<template>
+    <lightning-input type="text" label="Name" data-id="name" onchange={handleChange} >
+        </lightning-input>
+        <lightning-input type="text" label="voilationType" data-id="voilationtype" onchange={handleChange} >
+        </lightning-input>
+        <lightning-file-upload
+        label="Attach Certificate"
+        name="fileUploader"
+        onuploadfinished={handleUploadFinished}
+        
+        
+    >
+    </lightning-file-upload>
+    <template if:true={showSpinner} >
+    <div >
+
+ 
+   
+    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+</div>
+</template><br/>
+        <lightning-button label="Save" onclick={save} ></lightning-button>
+        Domunt Id={docId}
+</template>

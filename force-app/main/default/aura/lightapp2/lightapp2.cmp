@@ -1,0 +1,6 @@
+<aura:component >
+	 <div class="two">
+       Tech.:SFDC  <br/><br/>
+       Exp.::3
+    </div>
+</aura:component>

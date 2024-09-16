@@ -1,0 +1,31 @@
+<apex:page controller="soql_dml_1">
+    <apex:form >
+    <apex:sectionHeader title="Soql-Dml Operation"/>
+    <apex:pageblock title="Accounts" id="one">
+        <apex:pageMessages />
+        <apex:pageBlockButtons location="top">
+          <apex:commandButton value="save" action="{!save}"  reRender="one"/>
+            <apex:commandButton value="cancel"  action="{!cancel}"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Accounts" collapsible="true">
+            
+                <apex:inputField value="{!acc.name}"/>
+               <apex:inputField value="{!acc.Industry}"/>
+            <apex:inputField value="{!acc.state__c}"/>
+           <apex:inputField value="{!acc.select_city__c}"/>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Contacts" collapsible="false">
+           
+                <apex:inputField value="{!con.FirstName}"/>
+            <apex:inputField value="{!con.LastName}"/>
+             <apex:inputField value="{!con.Phone}"/>
+            	<apex:inputField value="{!con.Email}"/>
+        
+        </apex:pageBlockSection>
+    
+    
+    </apex:pageblock>
+    
+    </apex:form>
+</apex:page>

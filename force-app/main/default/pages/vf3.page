@@ -1,0 +1,21 @@
+<apex:page standardcontroller="Opportunity">
+    <apex:sectionHeader title="AJHWS" subtitle="New Registration"/>
+    <apex:form >
+        <apex:InlineEditSupport />
+    	<apex:pageBlock title="New Opportunity"  helptitle="Do you need help" helpurl="123" >
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton action="{!edit}" value="edit"  /> 
+                <apex:commandButton action="{!cancel}" value="cancel" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="Title" collapsible="true" rendered="true" >
+                  
+                <apex:outputText value="{!Opportunity.Name}" />
+                <apex:outputText value="{!Opportunity.ExpectedRevenue}"/>
+                <apex:outputText value="{!Opportunity.StageName}"/>
+                <apex:outputText value="{!Opportunity.Type}"/>
+                <apex:outputText value="{!Opportunity.CloseDate}"/>
+            </apex:pageBlockSection>
+            </apex:pageBlock>
+    </apex:form>
+    </apex:page>

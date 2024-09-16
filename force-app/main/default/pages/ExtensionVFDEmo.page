@@ -1,0 +1,5 @@
+<apex:page standardcontroller="account" extensions="Extension2,Extension3">
+    <apex:form >
+      <apex:commandButton value="submit" action="{!extensionMethod}" />
+    </apex:form>
+</apex:page>

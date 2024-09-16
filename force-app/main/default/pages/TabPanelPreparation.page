@@ -1,0 +1,28 @@
+<apex:page >
+          <apex:includeScript value="{!$Resource.JS_Example}"/>
+         <apex:stylesheet value="{!$Resource.color}"/>
+   <h1>
+                     vneet khandelwal
+                </h1>
+    
+
+        
+        <apex:tabPanel switchType="client" selectedTab="aaa">
+            <apex:tab label="Web Developer" >
+                <apex:include pageName="UserData"/>
+            </apex:tab>
+            <apex:tab label="Android Developer"  name="aaa"  >
+           
+                <apex:image url="{!URLFOR($Resource.MyPictures,'/Pictures/vineet.jpg')}"   />
+              
+            </apex:tab>
+            <apex:tab label="Salesforce Developer" styleClass="back">
+               
+            </apex:tab>
+            <apex:tab label="RubyObRail Developer">
+                d
+            
+            </apex:tab>
+        </apex:tabPanel>   
+
+</apex:page>

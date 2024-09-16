@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-page-header stickyHeader" style="display: flex; align-items: flex-center; justify-content: space-between;text-align: center; z-index: 10000;">
+        <div >
+        <lightning-icon  size="x-small"  style="margin-left:20px;" class="sldsicon"
+            
+            icon-name="utility:back" onclick={back}
+          ></lightning-icon>
+        </div>
+        <div class="slds-text-heading--label content" style="margin-left:-20px;">Application</div>
+        <div></div>
+    </div>
+    <div class="slds-scrollable inputDiv">
+        <template if:true={spinner}>
+            <div class="overlay">
+            <div class="spinner">
+        <lightning-spinner alternative-text="Loading"  ></lightning-spinner>
+    </div>
+</div>
+        </template>
+        <label>Enter First Name</label>
+        <lightning-input type="text" value={lead.FirstName} name="FirstName" onchange={valueAssignment} > </lightning-input>
+        <label>Enter Last Name</label>
+        <lightning-input type="text" value={lead.LastName} name="LastName" onchange={valueAssignment}> </lightning-input>
+        <label>Enter Email Name</label>
+        <lightning-input type="email" value={lead.Email} name="Email" onchange={valueAssignment}> </lightning-input>
+        <label>Enter Company Name</label>
+        <lightning-input type="text" value={lead.Company} name="Company" onchange={valueAssignment}> </lightning-input>
+        <label>Enter Mobile</label>
+        <lightning-input type="text" value={lead.Mobile} name="Mobile" onchange={valueAssignment} class="mobile"> </lightning-input>
+    </div>
+
+    <template if:true={enableDefault}>
+    <div class="slds-page-header stickyFooter">
+       <span class="slds-text-heading--label content">Footer</span>
+   </div>
+    </template>
+    <template if:true={save}  >
+   <div class={saveCSS} onclick={saveLead}  >
+    <span class="slds-text-heading--label content" style="margin-left:16px;">Save</span>
+</div>
+</template>
+</template>

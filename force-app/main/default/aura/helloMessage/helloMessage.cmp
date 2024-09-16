@@ -1,0 +1,4 @@
+<aura:component >
+    <aura:attribute name="message" type="string" description="Enter your custom message" />
+    <h1>{!v.message}</h1>
+</aura:component>

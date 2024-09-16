@@ -1,0 +1,50 @@
+<apex:page standardController="Account">
+<apex:form >
+<apex:pageblock >
+<apex:pageMessages />
+<apex:pageblockbuttons >
+<apex:commandButton value="save" action="{! save}"/>
+</apex:pageblockbuttons>
+<apex:pageblocksection >
+<apex:pageblocksectionItem >
+<apex:outputLabel value="Name"/>
+<apex:inputField value="{!account.name}"/>
+</apex:pageblocksectionItem>
+
+<apex:pageblocksectionItem >
+
+<apex:outputLabel value="Industry"/>
+<apex:inputField value="{!account.Industry}"/>
+</apex:pageblocksectionItem>
+
+<apex:pageblocksectionItem >
+
+<apex:outputLabel value="email"/>
+<apex:inputField value="{!account.Phone}"/>
+</apex:pageblocksectionItem>
+</apex:pageblocksection>
+
+
+</apex:pageblock>
+
+<apex:pageblock Title="Contacts">
+<apex:pageblocktable value="{!Account.contacts}" var="contact" >
+         <apex:column >
+            <apex:outputLink value="{! URLFOR($Action.Contact.Edit, contact.Id) }">
+                Edit
+            </apex:outputLink>
+            &nbsp;
+            <apex:outputLink value="{! URLFOR($Action.Contact.Delete, contact.Id) }">
+                Del
+            </apex:outputLink>
+        </apex:column>
+        
+<apex:column value="{!contact.firstname}"/>
+<apex:column value="{!contact.lastname}"/>
+<apex:column value="{!contact.email}"/>
+
+</apex:pageblocktable>
+
+</apex:pageblock>
+</apex:form>
+</apex:page>

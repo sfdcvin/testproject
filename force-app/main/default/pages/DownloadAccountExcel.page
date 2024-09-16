@@ -1,0 +1,5 @@
+<apex:page controller="AccountExportController" contenttype="application/octet-stream" cache="false">
+    <apex:outputText value="{!csvContent}" escape="false"/>
+
+
+</apex:page>

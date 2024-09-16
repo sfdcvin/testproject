@@ -1,0 +1,51 @@
+<aura:component controller="getOpportunityComponentApex">
+    <aura:attribute name="searchResult" type="Opportunity"  />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <label class="slds-checkbox">
+                            <!--      <ui:inputCheckbox value="{!v.isSelectAll}" change="{!c.handleSelectAllContact}" aura:id="selectAll"/> -->                            <span class="slds-checkbox--faux" />
+                            <span class="slds-form-element__label"></span>
+                        </label>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Id">Id</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Opportunity Name"> Opportunity Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Stage">Stage</div>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody> 
+                <!--### display all records of searchResult attribute by aura:iteration ###-->
+                <aura:iteration items="{!v.searchResult}" var="opp" indexVar="count">
+                    <tr>
+                        <td>
+                            <div class="slds-truncate"><label class="slds-checkbox">
+                                <ui:inputCheckbox aura:id="checkContact" value="" text="{!opp.Id}"/>
+                                <span class="slds-checkbox--faux" />
+                                <span class="slds-form-element__label"></span>
+                            </label></div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!opp.Id}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!opp.Name}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!opp.Name}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+
+
+</aura:component>

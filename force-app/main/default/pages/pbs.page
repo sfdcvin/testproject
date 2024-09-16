@@ -1,0 +1,25 @@
+<apex:page >
+    <script>
+   function colorPageBlock(pageblock, color) {
+if (pageblock != null) pageblock.firstChild.style.cssText = "background-color:" + color + ";";
+}
+</script>
+    <apex:form >
+    <apex:pageblock >
+         <apex:pageBlockSection >
+             <apex:facet name="header">
+                <h3 style="color:red;">
+                    SectionExample
+                 </h3>
+             </apex:facet>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="redSection" title="Section Example">
+            frgfvgfdgvg
+            gfdgvfd
+        <script>
+            colorPageBlock(document.getElementById("{!$Component.redSection}"), "red");
+            </script>
+        </apex:pageBlockSection>
+    </apex:pageblock>
+        </apex:form>
+</apex:page>

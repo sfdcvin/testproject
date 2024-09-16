@@ -1,0 +1,72 @@
+<apex:page controller="Collapsable_Apex">
+  
+       
+       <apex:form >
+           
+             <apex:pageBlock id="hide">
+           <apex:inlineEditSupport event="ondblclick"/>
+       <apex:pageBlockTable value="{!accs}" var="a">
+                    <apex:inlineEditSupport event="ondblclick"/>
+         <apex:column >
+             <apex:commandButton action="{!relatedList}" reRender="outpnl,outpnl1,showRelated,showId" value="Show">
+                    <apex:param name="id" assignTo="{!accId}" value="{!a.id}"/>
+                  </apex:commandButton>
+                 <apex:commandButton action="{!hide}" reRender="showId" value="Hide">
+              </apex:commandButton>
+               
+         
+         </apex:column>
+                           
+            <apex:column headerValue="Id" value="{!a.id}"/>
+         <apex:column headerValue="Name" value="{!a.name}" />               
+                
+          
+         <apex:column breakBefore="true" colspan="5" id="showId">
+              
+              <apex:pageBlock title="Related List" id="showRelated" rendered="{!show}" >
+              
+                <apex:outputText rendered="{!showMessage}">No Related List Found Found </apex:outputText>
+                
+                    <apex:pageBlock rendered="{!showRelated}" >           
+                               <apex:pageBlockSection title="Contacts" columns="1" >
+                      
+                                  <apex:outputPanel id="outpnl">
+                                      <apex:pageBlockTable value="{!contacts}" var="c" rendered="{!showContacts}" title="Contacts">
+                                        <apex:column >
+                                            <apex:facet name="header"><apex:inputCheckbox /></apex:facet>
+                               
+                                            <apex:inputCheckbox />
+                                        </apex:column>
+                                       <apex:column headerValue="Id" value="{!c.id}"/>
+                                       <apex:column headerValue="firstname" value="{!c.firstname}"/>
+                                       <apex:column headerValue="lastname" value="{!c.lastname}"/>
+                                      </apex:pageBlockTable>
+                                 </apex:outputPanel>
+                              </apex:pageBlockSection>
+                  
+        
+                
+                       <apex:pageBlockSection title="Opportunities" columns="1" >
+                          
+                             <apex:outputPanel id="outpnl1" >
+                              <apex:pageBlockTable value="{!Opportunities}" var="o"  rendered="{!showOpportunities}" title="Opportunities">
+                                 <apex:column >
+                                  <apex:facet name="header"><apex:inputCheckbox /></apex:facet>
+                                  <apex:inputCheckbox />
+                                 </apex:column>
+                                 <apex:column headerValue="Id" value="{!o.id}"/>
+                                 <apex:column headerValue="name" value="{!o.name}"/>
+                                 <apex:column headerValue="stagename" value="{!o.stagename}"/>
+                              </apex:pageBlockTable>
+                             </apex:outputPanel>
+                      </apex:pageBlockSection>
+                  </apex:pageBlock>
+               </apex:pageBlock>
+             </apex:column>
+    </apex:pageBlockTable>
+
+           
+            </apex:pageBlock> 
+       </apex:form>
+    
+</apex:page>

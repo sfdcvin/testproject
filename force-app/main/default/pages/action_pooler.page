@@ -1,0 +1,7 @@
+<apex:page controller="Outbound_Mail">
+    <apex:pageBlock id="pb">
+        <apex:form >
+    <apex:actionPoller action="{!call}" interval="5" reRender="pb"/>
+        </apex:form>
+        </apex:pageBlock>
+</apex:page>

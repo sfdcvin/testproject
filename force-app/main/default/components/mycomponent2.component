@@ -1,0 +1,12 @@
+<apex:component >
+    
+    <apex:attribute name="name" type="string" required="true" description="ff"></apex:attribute>
+    <apex:attribute name="phone" type="string" required="true" description="ff"></apex:attribute>
+    <apex:attribute name="age" type="integer" required="true" description="ff"></apex:attribute>
+    <div style="color:red;border:2px">
+                    
+       {!name}<br/>
+                    {!phone}<br/>
+                    {!age}<br/>
+    </div>
+</apex:component>

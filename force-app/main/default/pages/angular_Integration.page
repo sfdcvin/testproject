@@ -1,0 +1,9 @@
+<apex:page standardStylesheets="false">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+   
+    <div ng-app="">
+         {{1+2}} 
+        </div>
+   
+</apex:page>

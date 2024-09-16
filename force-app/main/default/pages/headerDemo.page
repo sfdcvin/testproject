@@ -1,0 +1,7 @@
+<apex:page controller="accountfiltercon">
+    <apex:form >
+    <apex:selectList size="1" value="{!selectedname}"> 
+        <apex:selectOptions value="{!selectedaccnamefields}"/>  
+    </apex:selectList>
+    </apex:form>
+</apex:page>

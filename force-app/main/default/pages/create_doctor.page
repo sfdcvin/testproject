@@ -1,0 +1,16 @@
+<apex:page controller="DuplicateDocter">
+    <apex:form >
+        
+     <apex:pageBlock title="New Docter">
+         <apex:pageMessages />
+         <apex:pageBlockButtons location="top">
+          <apex:commandButton value="save" action="{!save}"/>
+         
+         </apex:pageBlockButtons>
+         
+         <apex:inputText value="{!name}"/> 
+        
+      </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

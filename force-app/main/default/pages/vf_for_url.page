@@ -1,0 +1,8 @@
+<apex:page controller="AccountPaginationController">
+
+    <apex:form >
+        <a href="https://fishbonetech-dev-ed--c.ap5.visual.force.com/apex/Pagination2_vf" onclick="goBack()">Back to List</a>
+        <apex:detail subject="{!$CurrentPage.parameters.id}" relatedList="true"/>
+    </apex:form>
+
+</apex:page>

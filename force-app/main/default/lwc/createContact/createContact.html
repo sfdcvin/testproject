@@ -1,0 +1,59 @@
+<template>
+  <lightning-button label="Logout" title="Non-primary action" onclick={doLogout} class="slds-m-left_x-small" ></lightning-button>
+<template if:true={Error} > <p style="font-size:100px;">{Error}</p></template>
+<template  if:true={newConPage}>
+    <lightning-input
+    data-id="FirstNameId"
+    type="text"
+    name="fname"
+    placeholder='FirstName'
+    label='FirstName'
+    value={con.FirstName}
+    onchange={handleInputFieldChange}
+    class="fontSize"
+  ></lightning-input>
+  <br />
+
+  <lightning-input
+  data-id="LastNameId"
+  type="text"
+  name="lname"
+  placeholder='LastName'
+  label='LastName'
+  value={con.LastName}
+  onchange={handleInputFieldChange}
+></lightning-input>
+<br />
+
+<lightning-button 
+variant="brand" 
+label="Next" 
+onclick={nextCall}></lightning-button><br/>
+</template>
+
+
+<template if:true={cardVisibility}>
+    <template for:each={conList} for:item="acc" for:index="index">
+      <div key={acc.id} style="border-style: solid;padding:10px;padding-bottom: 3rem;margin-bottom:5px;border-radius:5px;" data-id={index} onclick={onEditClick}>
+      <div style="float:left">
+        First Name :{acc.FirstName} <br/>
+        Last Name : {acc.LastName}
+      </div> 
+      <div style="float:right">  
+              <lightning-icon icon-name="utility:new_direct_message" alternative-text="edit" title="edit"></lightning-icon>   
+               </div>
+
+      </div>
+    </template><br/>
+
+  
+  <lightning-button 
+variant="brand" 
+label="Add More" 
+onclick={addMore} style="float:left"></lightning-button> 
+<lightning-button 
+variant="brand" 
+label="Save Contact" 
+onclick={creatCon} style="float:right"></lightning-button>
+</template>
+</template>

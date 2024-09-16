@@ -1,0 +1,43 @@
+<apex:page standardController="Account" recordSetVar="xyz">
+    <apex:tabPanel >
+        <apex:tab label="PageBlockTable" >
+          <apex:pageBlock title="records">
+              <apex:pageBlockTable value="{!xyz}" var="a">
+                  <apex:column value="{!a.Name}"/>
+                  <apex:column value="{!a.state__c}"/>
+                  <apex:column value="{!a.select_city__c}"/>
+             </apex:pageBlockTable>
+                            
+          </apex:pageBlock>
+        </apex:tab>
+        
+        <apex:tab label="DataTable">
+          <apex:pageBlock title="records">
+              <apex:dataTable value="{!xyz}" var="a">
+                  <apex:column value="{!a.Name}"/>
+                  <apex:column value="{!a.state__c}"/>
+                  <apex:column value="{!a.select_city__c}"/>
+             </apex:dataTable>
+                            
+          </apex:pageBlock>
+        </apex:tab>
+        <apex:tab label="Datalist">
+          <apex:pageBlock title="records">
+              <apex:datalist value="{!xyz}" var="a">
+                {!a.Name}
+                  
+             </apex:datalist>
+                            
+          </apex:pageBlock>
+        </apex:tab>
+        <apex:tab label="Repeat">
+          <apex:pageBlock title="records">
+              <apex:repeat value="{!xyz}" var="a">
+                {!a.Name}
+                  
+           </apex:repeat>
+                            
+          </apex:pageBlock>
+        </apex:tab>
+    </apex:tabPanel>
+</apex:page>

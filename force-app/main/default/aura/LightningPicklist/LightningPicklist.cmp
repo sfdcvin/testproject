@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+    <aura:attribute name="select1" type="String"  />
+    <lightning:select name="select1" label="How many tickets?" required="true" value="{!v.select1}" onchange="{!c.doSomething}"  >
+        <option value="">choose one...</option>
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </lightning:select>
+    <aura:if isTrue="{!v.select1=='1'}">
+        <Lightning:textarea label="Describe Application"/>
+        <aura:set attribute="else">
+                    <aura:if isTrue="{!v.select1=='2'}">
+               <Lightning:textarea label="Your Message"/>
+   
+        </aura:if>
+                </aura:set> 
+    </aura:if> 
+    
+
+  
+</aura:component>

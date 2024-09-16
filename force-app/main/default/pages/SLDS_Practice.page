@@ -1,0 +1,8 @@
+<apex:page lightningStyleSheets="true">
+  
+    <div class="slds-scope">
+    <apex:slds />
+    <div class="slds-align_absolute-center" style="height:10rem">This content will be positioned in the absolute center of its container.</div>
+  
+</div>
+</apex:page>

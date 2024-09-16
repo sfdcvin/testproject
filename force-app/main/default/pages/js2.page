@@ -1,0 +1,24 @@
+<apex:page id="pg">
+    <script>
+    
+         function call(arg)
+    		{
+               alert(arg);
+    		}
+    </script>
+    
+    
+    
+    <apex:form id="fm">
+    <apex:pageBlock id="pb" >
+        <apex:pageBlockButtons id="b">
+          <apex:commandButton value="button1" id="b1" onclick="call(this.id)" reRender="pb"/>
+        
+        
+        </apex:pageBlockButtons>
+    
+    
+    
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

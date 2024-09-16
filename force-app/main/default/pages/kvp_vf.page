@@ -1,0 +1,18 @@
+<apex:page showheader="false" controller="TestTableController">
+    <style>
+        td.customMargin{
+             margin-right:50px;
+        }
+       
+    </style>
+    <!-- uncomment styling to see change -->
+    <apex:pageblock title="Account List">
+        <apex:pageblockTable value="{!accountList}" var="acc">
+            <apex:column headerValue="Id" value="{!acc.Id}" width="200px;" styleClass="customMargin"/>
+            <apex:column headerValue="Name" value="{!acc.Name}" width="200px;"/>
+            <apex:column headerValue="Street" value="{!acc.BillingStreet}" width="200px;"/>
+            <apex:column headerValue="City" value="{!acc.BillingCity}" width="200px;"/>
+            
+        </apex:pageblockTable>
+    </apex:pageblock>
+</apex:page>

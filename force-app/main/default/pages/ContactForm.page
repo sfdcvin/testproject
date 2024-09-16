@@ -1,0 +1,39 @@
+<apex:page standardController="contact" extensions="ContactExtention" recordSetVar="records">
+    <apex:form >
+        <apex:pageBlock id="tab"  >  
+            <apex:selectList size="1" value="{! filterId}" >
+                <apex:selectOptions value="{! listviewOptions}" />
+                <apex:actionSupport event="onchange" reRender="tab" status="abc" />
+                <apex:actionStatus id="abc">
+                    <apex:facet name="start">               
+                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />     
+                    </apex:facet>
+                </apex:actionStatus>
+                
+            </apex:selectList>
+            <apex:pageBlockButtons >
+                
+                <apex:commandButton value="first" action="{!first}" disabled="{! !hasprevious}" reRender="tab" />
+                <apex:commandButton value="Next"  disabled="{! !hasnext}" action="{!Next}" reRender="tab" />
+                <apex:commandButton value="previous"  disabled="{! !hasprevious}" action="{!previous}" reRender="tab" />
+                <apex:commandButton value="last"   disabled="{! !hasnext}" action="{!last}" reRender="tab" />
+                
+                
+            </apex:pageBlockButtons>
+            <apex:variable var="rowNum" value="{!1}"  />
+            <apex:pageBlockTable value="{!records}" var="a" >
+                <apex:column >
+                    {!rowNum}
+                    <apex:variable var="rowNum"  value="{! rowNum+1}"/>
+                </apex:column>
+                
+                
+                <apex:column value="{!a.firstname}" />
+                <apex:column value="{!a.lastname}"/>
+                
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        
+    </apex:form>
+</apex:page>

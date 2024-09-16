@@ -1,0 +1,26 @@
+<apex:page id="pg" >
+    <script>
+    function call()
+    		{
+               firstname=document.getElementById('pg:fm:pb:fn').value;
+                lastname=document.getElementById('pg:fm:pb:ln').value;
+              result=firstname+" "+lastname;
+                document.getElementById('pg:fm:pb:rs').value=result;
+    		}
+      
+    </script>
+    <apex:form id="fm">
+        <apex:pageBlock id="pb" >
+          
+            first name:<apex:inputText id="fn"  />
+            last  name:<apex:inputText id="ln"  />
+            result   :<apex:inputText id="rs" />
+            <button   onclick="call()">
+                click
+            </button>
+        </apex:pageBlock>
+    
+    
+    
+    </apex:form>
+</apex:page>

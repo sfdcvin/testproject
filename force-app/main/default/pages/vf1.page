@@ -1,0 +1,41 @@
+<apex:page >
+    <apex:form >
+    <apex:sectionHeader title="Employee" subtitle="New Employee" help="https://www.google.co.in" />
+    <apex:pageBlock title="Employee Detail" >
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Edit" />
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Cancel"/>
+            
+         </apex:pageBlockButtons>
+                    <apex:outputLabel style="color:red ; font-family: verdana;font-size: 15px;">Enter Name:</apex:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputText size="10"   style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:red ; font-family: verdana;font-size: 15px;">Enter Qualification:</apex:outputLabel>
+                    <apex:inputText size="10" style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:red ; font-family: verdana;font-size: 15px;" >Enter Contact No.:</apex:outputLabel>&nbsp;&nbsp;
+                    <apex:inputText size="10" style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:red ; font-family: verdana;font-size: 15px;" >Enter Address:</apex:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputText size="10" style="height:20px"/>
+            
+    </apex:pageBlock>
+        
+    <apex:pageBlock title="Student Detail" >
+        <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Edit" />
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Cancel"/>
+            
+         </apex:pageBlockButtons>
+                    <apex:outputLabel style="color:blue ; font-family: verdana;font-size: 15px;">Enter Name:</apex:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputText size="10"   style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:blue ; font-family: verdana;font-size: 15px;">Enter City:</apex:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputText size="10" style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:blue ; font-family: verdana;font-size: 15px;" >Enter Contact No.:</apex:outputLabel>&nbsp;&nbsp;
+                    <apex:inputText size="10" style="height:20px"/><br/><br/>
+                    <apex:outputLabel style="color:blue ; font-family: verdana;font-size: 15px;" >Enter Address:</apex:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:inputText size="10" style="height:20px"/>
+            
+    </apex:pageBlock>
+        </apex:form>
+    
+</apex:page>

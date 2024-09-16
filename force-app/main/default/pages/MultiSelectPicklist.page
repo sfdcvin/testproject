@@ -1,0 +1,57 @@
+<apex:page controller="MultiSelectPicklist">
+<style> 
+    #overlay{
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+   
+    }
+</style>
+    <script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+     <div id="overlay" onclick="off()">
+    <apex:form >
+
+       
+                <div id="child" style="margin-top:20%;margin-left:40%">  
+        <apex:panelGrid columns="3" id="abcd">
+            <apex:selectList id="sel1" value="{!leftselected}" multiselect="true" style="width:100px" size="5">
+                <apex:selectOptions value="{!unselectedvalues}" />
+            </apex:selectList>
+                <apex:panelGroup >
+                    <br/>
+                    <apex:image value="{!$Resource.multiselected}">
+                        <apex:actionSupport event="onclick" action="{!selectclick}" reRender="abcd"/>
+                    </apex:image>
+                    <br/><br/>
+                    <apex:image value="{!$Resource.multiunselected}">
+                        <apex:actionSupport event="onclick" action="{!unselectclick}" reRender="abcd"/>
+                    </apex:image>
+                </apex:panelGroup>
+            <apex:selectList id="sel2" value="{!rightselected}" multiselect="true" style="width:100px" size="5">
+                <apex:selectOptions value="{!SelectedValues}" />
+            </apex:selectList>
+        </apex:panelGrid>
+             </div>
+       
+             
+    </apex:form>
+         </div>
+          <button onclick="on()">Turn on overlay effect</button>
+          
+</apex:page>

@@ -1,0 +1,40 @@
+<apex:page standardController="Account" extensions="AccountGSTIntegration" id="page1">
+    <apex:pageMessages id="msgId"/>
+    <script type="text/javascript">
+    function callJS()
+    {
+        callApex(document.getElementById("page1:form1:gstinNumber").value);
+        
+    }
+    </script> 
+    <apex:form id="form1">
+        
+        <apex:actionFunction action="{!getGSTData}" immediate="true" name="callApex" reRender="GSTSection,msgId">
+            <apex:param name="firstParam" assignTo="{!gstNumber}" value="" />
+        </apex:actionFunction>
+        Enter GST:<apex:inputText label="Enter GST Number" value="{!Account.GSTN__c}" id="gstinNumber"/>
+        <apex:commandButton value="Search"  immediate="true" onclick="callJS();return false;"/>
+        
+        
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" />
+                <apex:commandButton action="{!cancel}" value="Cancel" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Basic Information">
+                <apex:inputField value="{!Account.Name}"/>
+                <apex:inputField value="{!Account.Rating}"/>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="op1">
+                <apex:pageBlockSection title="Account GST Information" id="GSTSection">
+                    <apex:inputField value="{!Account.GSTN__c}"/>
+                    <apex:inputField value="{!Account.Legal_Name_of_Business__c}"/>
+                    <apex:inputField value="{!Account.Trade_Name_of_Business__c}"/>
+                    <apex:inputField value="{!Account.GSTN_Status__c}"/>
+                    <apex:inputField value="{!Account.Date_of_Registration__c}"/>
+                    <apex:inputField value="{!Account.Constitution_of_Business__c}"/>
+                </apex:pageBlockSection> 
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

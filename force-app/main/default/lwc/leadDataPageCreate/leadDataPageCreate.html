@@ -1,0 +1,22 @@
+<template>
+    <div style="position:sticky;">
+        <lightning-input type="text" label="Enter First Name" name="fname" onchange={handleChange}></lightning-input>
+        <lightning-input type="text" label="Enter Last Name" name="lname" onchange={handleChange}></lightning-input>
+        <lightning-input type="text" label="Enter Email" name="email" onchange={handleChange}></lightning-input>
+        <lightning-input type="text" label="Company" name="company" onchange={handleChange}></lightning-input>
+        <lightning-file-upload
+        label="Attach doc"
+        name="fileUploader"
+        onuploadfinished={handleUploadFinished}
+        multiple
+    >
+    </lightning-file-upload>
+        {error}
+    </br>
+    <template lwc:if={spinner} >
+    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+</template>
+<lightning-button label="Save" title="Non-primary action" onclick={handleSave} class="slds-m-left_x-small" ></lightning-button>
+
+    </div>
+</template>

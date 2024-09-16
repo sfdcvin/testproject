@@ -1,0 +1,7 @@
+<apex:page controller="NewJsonGenerator1">
+    <apex:form >
+    <apex:inputText value="{!search}"/>
+    <apex:commandButton value="click" action="{!searchFunction}"/>
+    {!accounts}
+        </apex:form>
+</apex:page>

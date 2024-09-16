@@ -1,0 +1,3 @@
+<apex:page standardController="contact" recordSetVar="con">
+    <c:AccountTableComponent accData="{!con}" />
+</apex:page>

@@ -1,0 +1,11 @@
+<aura:component >
+	<aura:attribute name="value1" type="Integer" ></aura:attribute>
+    <aura:attribute name="value2" type="Integer" ></aura:attribute>
+    <div class="mystyle">   
+        Value1   :: {!v.value1} <br/><br/>
+        value2   :: {!v.value2}<br/><br/>
+        addition ::  
+    
+    </div>
+
+</aura:component>

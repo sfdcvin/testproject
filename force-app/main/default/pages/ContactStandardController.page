@@ -1,0 +1,19 @@
+<apex:page standardController="contact" recordSetVar="connlist">
+    <apex:form >
+        <apex:pageBlock >  
+            <apex:pageBlockButtons >
+                
+            <apex:commandButton value="Next" action="{!Next}" reRender="tab" />
+                
+            
+            </apex:pageBlockButtons>
+             <apex:pageBlockTable value="{!connlist}" var="a" id="tab" >
+                 <apex:column value="{!a.firstname}" />
+                 <apex:column value="{!a.lastname}"/>
+            
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    
+            
+    </apex:form>
+</apex:page>

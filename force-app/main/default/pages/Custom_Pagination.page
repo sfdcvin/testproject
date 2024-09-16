@@ -1,0 +1,23 @@
+<apex:page controller="Custom_Pagination">
+   
+    <apex:form >
+    <apex:sectionHeader title="Pagination"/>
+        <apex:pageBlock >
+        <apex:pageBlockButtons location="top">
+                <apex:commandButton value="First" action="{!controller.first}" rendered="{!controller.hasprevious}"/>
+                <apex:commandButton value="Previous" action="{!controller.previous}"  rendered="{!controller.hasprevious}"/>
+                <apex:commandButton value="Next" action="{!controller.next}"  rendered="{!controller.hasnext}" />
+                <apex:commandButton value="Last" action="{!controller.last}"  rendered="{!controller.hasnext}"/>
+            </apex:pageBlockButtons>
+             
+         <apex:pageBlockTable value="{!Obj}" var="a">
+            
+             <apex:column headerValue="Name" value="{!a.name}"/>
+             <apex:column headerValue="City" value="{!a.City__c}"/>
+             
+            
+        
+            </apex:pageBlockTable><br/><br/>
+        </apex:pageBlock>
+    </apex:form>
+            </apex:page>

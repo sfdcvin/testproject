@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Update Account Name">
+        <div data-id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+        <div class="slds-m-around_medium">
+            <lightning-input label="New Account Name" value={accountName} onchange={handleNameChange}></lightning-input>
+            <lightning-button label="Update" onclick={updateAccountName} class="slds-m-top_small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

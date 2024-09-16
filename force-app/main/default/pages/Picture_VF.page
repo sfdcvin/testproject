@@ -1,0 +1,22 @@
+<apex:page id="pg">
+     <script>
+       function clickMe()
+    {
+        
+         document.getElementById('pg:fm:pb:one').innerHTML="Hi,AlienBrainziens";
+
+    
+    }
+    </script>
+    <apex:form id="fm">
+   
+  <apex:pageBlock id="pb">
+       <apex:image value="{!$Resource.Krishna}" width="200" height="200"   onclick="clickMe()" />  
+     
+      
+      <br/><br/><br/>
+       <apex:outputLabel id="one"></apex:outputLabel>
+        </apex:pageBlock>
+  
+        </apex:form>
+</apex:page>

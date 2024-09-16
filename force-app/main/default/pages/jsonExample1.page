@@ -1,0 +1,5 @@
+<apex:page controller="jsonExample1">
+    {!str}<br/>
+    {!jsonstr}<br/>
+    {!student}
+</apex:page>

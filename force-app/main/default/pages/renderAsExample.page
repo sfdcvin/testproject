@@ -1,0 +1,11 @@
+<apex:page readOnly="true"  controller="Soql_1"  contentType="application/vnd.msword" >
+    
+   
+            <apex:pageBlock >
+            <apex:pageBlockTable value="{!acclist}" var="a" >
+            <apex:column value="{!a.Id}"/>  &nbsp;&nbsp;&nbsp;
+            <apex:column value="{!a.Name}"/>
+
+            </apex:pageBlockTable>
+            </apex:pageBlock>
+</apex:page>
